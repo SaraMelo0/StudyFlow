@@ -4,7 +4,7 @@
 
 | Nome do Aluno | Responsabilidades |
 |---|---|
-|  | Tela Inicial / Dashboard |
+| Sara Santos de Melo | Tela Inicial / Dashboard |
 |  | Tela de Cadastro e Gerenciamento de Matérias |
 |  | Tela de Sessões de Estudo |
 |  | Desenvolvimento do Timer e Controle de Sessões |
