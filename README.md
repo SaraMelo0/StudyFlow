@@ -1,4 +1,4 @@
-## Observação: O readme com os integrantes e funcões está dentro do projeto.
+## Observação: O readme com os integrantes e funções está dentro do projeto.
 
 # 📚 StudyFlow
 
