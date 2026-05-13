@@ -7,11 +7,9 @@
 | Sara Santos de Melo | Tela Inicial / Dashboard |
 | Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias |
 | Victor Ferreira | Tela de Sessões de Estudo |
-|  Julia Cabral da Silva | Desenvolvimento do Timer e Controle de Sessões |
+| Julia Cabral da Silva | Desenvolvimento do Timer e Controle de Sessões |
 |  | Implementação do Progresso Semanal e Sequência de Estudos |
-|  | Desenvolvimento do Timer e Controle de Sessões |
 | João Pedro Rocha Silva Valadares | Implementação do Progresso Semanal e Sequência de Estudos |
-|  | Navegação entre Telas e Gerenciamento de Rotas |
 | Helena Passos Farias | Documentação, suporte de código e Organização do Projeto |
 
 ---
