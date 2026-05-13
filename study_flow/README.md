@@ -5,7 +5,7 @@
 | Nome do Aluno | Responsabilidades |
 |---|---|
 | Sara Santos de Melo | Tela Inicial / Dashboard |
-|  | Tela de Cadastro e Gerenciamento de Matérias |
+| Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias |
 |  | Tela de Sessões de Estudo |
 |  | Desenvolvimento do Timer e Controle de Sessões |
 |  | Implementação do Progresso Semanal e Sequência de Estudos |
