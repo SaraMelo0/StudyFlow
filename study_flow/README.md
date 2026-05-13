@@ -6,7 +6,7 @@
 |---|---|
 | Sara Santos de Melo | Tela Inicial / Dashboard |
 | Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias |
-|  | Tela de Sessões de Estudo |
+| Victor Ferreira | Tela de Sessões de Estudo |
 |  | Desenvolvimento do Timer e Controle de Sessões |
 |  | Implementação do Progresso Semanal e Sequência de Estudos |
 |  | Navegação entre Telas e Gerenciamento de Rotas |
