@@ -68,7 +68,9 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
                         const SizedBox(height: 4),
                         CabecalhoLogo(
                           aoVoltar: () {
-                            EscopoCoordenadorNavegacao.de(context).voltar(context);
+                            EscopoCoordenadorNavegacao.de(
+                              context,
+                            ).voltar(context);
                           },
                         ),
                         const SizedBox(height: 16),

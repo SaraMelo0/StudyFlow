@@ -18,8 +18,7 @@ class ItemNavegacao extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cor =
-        selecionado ? CoresAplicacao.laranja : CoresAplicacao.preto;
+    final cor = selecionado ? CoresAplicacao.laranja : CoresAplicacao.preto;
 
     return InkWell(
       onTap: aoTocar,
