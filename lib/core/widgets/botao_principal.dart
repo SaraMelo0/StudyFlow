@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:study_flow/core/theme/study_flow_colors.dart';
+import 'package:study_flow/core/theme/cores_aplicacao.dart';
 
-class StudyflowPrimaryCta extends StatelessWidget {
-  const StudyflowPrimaryCta({
+class BotaoPrincipal extends StatelessWidget {
+  const BotaoPrincipal({
     super.key,
-    required this.label,
-    required this.textTheme,
-    required this.onPressed,
-    this.leading,
+    required this.rotulo,
+    required this.temaTexto,
+    required this.aoPressionar,
+    this.iconePrefixo,
   });
 
-  final String label;
-  final TextTheme textTheme;
-  final VoidCallback onPressed;
-  final Widget? leading;
+  final String rotulo;
+  final TextTheme temaTexto;
+  final VoidCallback aoPressionar;
+  final Widget? iconePrefixo;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class StudyflowPrimaryCta extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: StudyFlowColors.orange.withValues(alpha: 0.28),
+              color: CoresAplicacao.laranja.withValues(alpha: 0.28),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
@@ -34,27 +34,27 @@ class StudyflowPrimaryCta extends StatelessWidget {
         ),
         child: FilledButton(
           style: FilledButton.styleFrom(
-            backgroundColor: StudyFlowColors.orange,
+            backgroundColor: CoresAplicacao.laranja,
             foregroundColor: Colors.white,
             elevation: 0,
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
-            textStyle: textTheme.titleMedium?.copyWith(
+            textStyle: temaTexto.titleMedium?.copyWith(
               fontWeight: FontWeight.w800,
               fontSize: 16,
             ),
           ),
-          onPressed: onPressed,
-          child: leading == null
-              ? Text(label)
+          onPressed: aoPressionar,
+          child: iconePrefixo == null
+              ? Text(rotulo)
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    leading!,
+                    iconePrefixo!,
                     const SizedBox(width: 10),
-                    Text(label),
+                    Text(rotulo),
                   ],
                 ),
         ),

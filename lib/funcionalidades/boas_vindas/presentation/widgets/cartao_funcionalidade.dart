@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:study_flow/core/theme/study_flow_colors.dart';
+import 'package:study_flow/core/theme/cores_aplicacao.dart';
 
-class StudyflowFeatureCard extends StatelessWidget {
-  const StudyflowFeatureCard({
+class CartaoFuncionalidade extends StatelessWidget {
+  const CartaoFuncionalidade({
     super.key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.textTheme,
+    required this.icone,
+    required this.titulo,
+    required this.subtitulo,
+    required this.temaTexto,
   });
 
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final TextTheme textTheme;
+  final IconData icone;
+  final String titulo;
+  final String subtitulo;
+  final TextTheme temaTexto;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,10 @@ class StudyflowFeatureCard extends StatelessWidget {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: StudyFlowColors.orange,
+                color: CoresAplicacao.laranja,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: Colors.white, size: 26),
+              child: Icon(icone, color: Colors.white, size: 26),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -50,9 +50,9 @@ class StudyflowFeatureCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
-                    style: textTheme.titleMedium?.copyWith(
-                      color: StudyFlowColors.orange,
+                    titulo,
+                    style: temaTexto.titleMedium?.copyWith(
+                      color: CoresAplicacao.laranja,
                       fontWeight: FontWeight.w800,
                       fontSize: 16,
                       height: 1.2,
@@ -60,9 +60,9 @@ class StudyflowFeatureCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    subtitle,
-                    style: textTheme.bodyMedium?.copyWith(
-                      color: StudyFlowColors.orange,
+                    subtitulo,
+                    style: temaTexto.bodyMedium?.copyWith(
+                      color: CoresAplicacao.laranja,
                       fontWeight: FontWeight.w600,
                       fontSize: 13.5,
                       height: 1.35,

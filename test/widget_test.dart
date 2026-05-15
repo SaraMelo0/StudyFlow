@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:study_flow/app/study_flow_app.dart';
+import 'package:study_flow/app/aplicacao_estudo_fluxo.dart';
 
 void main() {
   testWidgets('Tela de boas-vindas exibe ações principais', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const StudyFlowApp());
+    await tester.pumpWidget(const AplicacaoEstudoFluxo());
 
     expect(find.text('Começar Agora'), findsOneWidget);
     expect(find.text('Já tenho conta'), findsOneWidget);
@@ -16,7 +16,7 @@ void main() {
   testWidgets('Já tenho conta abre a tela de login', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const StudyFlowApp());
+    await tester.pumpWidget(const AplicacaoEstudoFluxo());
     await tester.tap(find.text('Já tenho conta'));
     await tester.pumpAndSettle();
 

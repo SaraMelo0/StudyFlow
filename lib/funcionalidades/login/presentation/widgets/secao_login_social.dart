@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'package:study_flow/core/strings/study_flow_strings.dart';
-import 'package:study_flow/core/theme/study_flow_colors.dart';
+import 'package:study_flow/core/strings/textos_aplicacao.dart';
+import 'package:study_flow/core/theme/cores_aplicacao.dart';
 
-class LoginSocialSection extends StatelessWidget {
-  const LoginSocialSection({
+class SecaoLoginSocial extends StatelessWidget {
+  const SecaoLoginSocial({
     super.key,
-    required this.textTheme,
-    required this.onSocialAuth,
+    required this.temaTexto,
+    required this.aoAutenticacaoSocial,
   });
 
-  final TextTheme textTheme;
-  final VoidCallback onSocialAuth;
+  final TextTheme temaTexto;
+  final VoidCallback aoAutenticacaoSocial;
 
-  static const double _btnSize = 52;
+  static const double _tamanhoBotao = 52;
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +22,21 @@ class LoginSocialSection extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Divider(color: StudyFlowColors.dividerMuted, thickness: 1),
+              child: Divider(color: CoresAplicacao.divisorSuave, thickness: 1),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Text(
-                StudyFlow.loginOuContinueCom.texto,
-                style: textTheme.bodySmall?.copyWith(
-                  color: StudyFlowColors.dividerMuted,
+                TextosAplicacao.loginOuContinueCom.texto,
+                style: temaTexto.bodySmall?.copyWith(
+                  color: CoresAplicacao.divisorSuave,
                   fontWeight: FontWeight.w600,
                   fontSize: 13,
                 ),
               ),
             ),
             Expanded(
-              child: Divider(color: StudyFlowColors.dividerMuted, thickness: 1),
+              child: Divider(color: CoresAplicacao.divisorSuave, thickness: 1),
             ),
           ],
         ),
@@ -44,9 +44,9 @@ class LoginSocialSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _SocialButton(
-              onPressed: onSocialAuth,
-              child: const Text(
+            _BotaoSocial(
+              aoPressionar: aoAutenticacaoSocial,
+              filho: const Text(
                 'G',
                 style: TextStyle(
                   color: Colors.white,
@@ -56,14 +56,14 @@ class LoginSocialSection extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 20),
-            _SocialButton(
-              onPressed: onSocialAuth,
-              child: Icon(Icons.apple, color: Colors.white, size: 28),
+            _BotaoSocial(
+              aoPressionar: aoAutenticacaoSocial,
+              filho: Icon(Icons.apple, color: Colors.white, size: 28),
             ),
             const SizedBox(width: 20),
-            _SocialButton(
-              onPressed: onSocialAuth,
-              child: const Text(
+            _BotaoSocial(
+              aoPressionar: aoAutenticacaoSocial,
+              filho: const Text(
                 'f',
                 style: TextStyle(
                   color: Colors.white,
@@ -79,25 +79,25 @@ class LoginSocialSection extends StatelessWidget {
   }
 }
 
-class _SocialButton extends StatelessWidget {
-  const _SocialButton({required this.child, required this.onPressed});
+class _BotaoSocial extends StatelessWidget {
+  const _BotaoSocial({required this.filho, required this.aoPressionar});
 
-  final Widget child;
-  final VoidCallback onPressed;
+  final Widget filho;
+  final VoidCallback aoPressionar;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: StudyFlowColors.orange,
+      color: CoresAplicacao.laranja,
       borderRadius: BorderRadius.circular(12),
       elevation: 0,
       child: InkWell(
-        onTap: onPressed,
+        onTap: aoPressionar,
         borderRadius: BorderRadius.circular(12),
         child: SizedBox(
-          width: LoginSocialSection._btnSize,
-          height: LoginSocialSection._btnSize,
-          child: Center(child: child),
+          width: SecaoLoginSocial._tamanhoBotao,
+          height: SecaoLoginSocial._tamanhoBotao,
+          child: Center(child: filho),
         ),
       ),
     );
