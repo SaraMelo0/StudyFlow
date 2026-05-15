@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:study_flow/core/theme/study_flow_colors.dart';
+import 'package:study_flow/core/theme/cores_aplicacao.dart';
 
 class CardHoje extends StatelessWidget {
   const CardHoje({
@@ -19,7 +19,7 @@ class CardHoje extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
       decoration: BoxDecoration(
-        color: StudyFlowColors.cardPeach,
+        color: CoresAplicacao.cartaoPessego,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -29,7 +29,7 @@ class CardHoje extends StatelessWidget {
             valor,
             textAlign: TextAlign.center,
             style: temaTexto.headlineSmall?.copyWith(
-              color: StudyFlowColors.orange,
+              color: CoresAplicacao.laranja,
               fontWeight: FontWeight.w800,
               fontSize: 22,
               height: 1.1,
@@ -40,7 +40,7 @@ class CardHoje extends StatelessWidget {
             rotulo,
             textAlign: TextAlign.center,
             style: temaTexto.bodySmall?.copyWith(
-              color: StudyFlowColors.cinza7A,
+              color: CoresAplicacao.cinza7A,
               fontWeight: FontWeight.w600,
               fontSize: 12.5,
             ),

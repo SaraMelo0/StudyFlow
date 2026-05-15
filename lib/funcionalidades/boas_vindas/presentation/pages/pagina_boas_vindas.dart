@@ -1,81 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:study_flow/coordinator/study_flow_coordinator.dart';
-import 'package:study_flow/core/strings/study_flow_strings.dart';
-import 'package:study_flow/core/theme/study_flow_colors.dart';
-import 'package:study_flow/core/widgets/studyflow_logo_header.dart';
-import 'package:study_flow/funcionalidades/welcome/presentation/widgets/studyflow_feature_card.dart';
-import 'package:study_flow/core/widgets/studyflow_button.dart';
+import 'package:study_flow/coordinator/coordenador_navegacao.dart';
+import 'package:study_flow/core/strings/textos_aplicacao.dart';
+import 'package:study_flow/core/theme/cores_aplicacao.dart';
+import 'package:study_flow/core/widgets/cabecalho_logo.dart';
+import 'package:study_flow/funcionalidades/boas_vindas/presentation/widgets/cartao_funcionalidade.dart';
+import 'package:study_flow/core/widgets/botao_principal.dart';
 
-const double _kMaxContentWidth = 420;
+const double _larguraMaximaConteudo = 420;
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key});
+class PaginaBoasVindas extends StatelessWidget {
+  const PaginaBoasVindas({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final welcomeContext = context;
-    final textTheme = GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme);
+    final contextoBoasVindas = context;
+    final temaTexto = GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme);
 
     return Scaffold(
-      backgroundColor: StudyFlowColors.background,
+      backgroundColor: CoresAplicacao.fundo,
       body: SafeArea(
         child: LayoutBuilder(
-          builder: (layoutContext, constraints) {
+          builder: (contextoLayout, restricoes) {
             return SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                constraints: BoxConstraints(minHeight: restricoes.maxHeight),
                 child: Center(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(
-                      maxWidth: _kMaxContentWidth,
+                      maxWidth: _larguraMaximaConteudo,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         const SizedBox(height: 12),
-                        const StudyflowLogoHeader(),
+                        const CabecalhoLogo(),
                         const SizedBox(height: 20),
                         Text(
-                          StudyFlow.textoBemVindo.texto,
+                          TextosAplicacao.textoBemVindo.texto,
                           textAlign: TextAlign.center,
-                          style: textTheme.titleMedium?.copyWith(
-                            color: StudyFlowColors.darkBrown,
+                          style: temaTexto.titleMedium?.copyWith(
+                            color: CoresAplicacao.preto,
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                             height: 1.35,
                           ),
                         ),
                         const SizedBox(height: 32),
-                        StudyflowFeatureCard(
-                          icon: Icons.trending_up_rounded,
-                          title: StudyFlow.progressoTitulo.texto,
-                          subtitle: StudyFlow.progressoSubtitulo.texto,
-                          textTheme: textTheme,
+                        CartaoFuncionalidade(
+                          icone: Icons.trending_up_rounded,
+                          titulo: TextosAplicacao.progressoTitulo.texto,
+                          subtitulo: TextosAplicacao.progressoSubtitulo.texto,
+                          temaTexto: temaTexto,
                         ),
                         const SizedBox(height: 12),
-                        StudyflowFeatureCard(
-                          icon: Icons.bolt_rounded,
-                          title: StudyFlow.pomodoroTitulo.texto,
-                          subtitle: StudyFlow.pomodoroSubtitulo.texto,
-                          textTheme: textTheme,
+                        CartaoFuncionalidade(
+                          icone: Icons.bolt_rounded,
+                          titulo: TextosAplicacao.pomodoroTitulo.texto,
+                          subtitulo: TextosAplicacao.pomodoroSubtitulo.texto,
+                          temaTexto: temaTexto,
                         ),
                         const SizedBox(height: 12),
-                        StudyflowFeatureCard(
-                          icon: Icons.track_changes_rounded,
-                          title: StudyFlow.definaMetasTitulo.texto,
-                          subtitle: StudyFlow.definaMetasSubtitulo.texto,
-                          textTheme: textTheme,
+                        CartaoFuncionalidade(
+                          icone: Icons.track_changes_rounded,
+                          titulo: TextosAplicacao.definaMetasTitulo.texto,
+                          subtitulo: TextosAplicacao.definaMetasSubtitulo.texto,
+                          temaTexto: temaTexto,
                         ),
                         const SizedBox(height: 36),
-                        StudyflowPrimaryCta(
-                          label: StudyFlow.comecarAgora.texto,
-                          textTheme: textTheme,
+                        BotaoPrincipal(
+                          rotulo: TextosAplicacao.comecarAgora.texto,
+                          temaTexto: temaTexto,
                           // TODO: navegar para a tela de cadastro.
-                          onPressed: () {},
+                          aoPressionar: () {},
                         ),
                         const SizedBox(height: 12),
                         SizedBox(
@@ -83,9 +83,9 @@ class WelcomePage extends StatelessWidget {
                           width: double.infinity,
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              foregroundColor: StudyFlowColors.orange,
+                              foregroundColor: CoresAplicacao.laranja,
                               side: const BorderSide(
-                                color: StudyFlowColors.orange,
+                                color: CoresAplicacao.laranja,
                                 width: 1.5,
                               ),
                               backgroundColor: Colors.white,
@@ -94,25 +94,25 @@ class WelcomePage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(14),
                               ),
-                              textStyle: textTheme.titleMedium?.copyWith(
+                              textStyle: temaTexto.titleMedium?.copyWith(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 16,
                               ),
                             ),
                             onPressed: () {
-                              StudyFlowCoordinatorScope.de(
-                                welcomeContext,
-                              ).mostrarLogin(welcomeContext);
+                              EscopoCoordenadorNavegacao.de(
+                                contextoBoasVindas,
+                              ).mostrarLogin(contextoBoasVindas);
                             },
-                            child: Text(StudyFlow.jaTenhoConta.texto),
+                            child: Text(TextosAplicacao.jaTenhoConta.texto),
                           ),
                         ),
                         const SizedBox(height: 28),
                         Text(
-                          StudyFlow.textoRodape.texto,
+                          TextosAplicacao.textoRodape.texto,
                           textAlign: TextAlign.center,
-                          style: textTheme.bodyMedium?.copyWith(
-                            color: StudyFlowColors.mutedBrown,
+                          style: temaTexto.bodyMedium?.copyWith(
+                            color: CoresAplicacao.marromSuave,
                             fontWeight: FontWeight.w500,
                             height: 1.45,
                             fontSize: 13.5,

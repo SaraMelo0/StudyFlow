@@ -1,59 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:study_flow/core/strings/study_flow_strings.dart';
-import 'package:study_flow/core/theme/study_flow_colors.dart';
+import 'package:study_flow/core/strings/textos_aplicacao.dart';
+import 'package:study_flow/core/theme/cores_aplicacao.dart';
 
-class LoginCredentialsCard extends StatefulWidget {
-  const LoginCredentialsCard({
+class CartaoCredenciais extends StatefulWidget {
+  const CartaoCredenciais({
     super.key,
-    required this.emailController,
-    required this.passwordController,
-    required this.textTheme,
-    this.onForgotPassword,
+    required this.controladorEmail,
+    required this.controladorSenha,
+    required this.temaTexto,
+    this.aoEsqueceuSenha,
   });
 
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-  final TextTheme textTheme;
-  final VoidCallback? onForgotPassword;
+  final TextEditingController controladorEmail;
+  final TextEditingController controladorSenha;
+  final TextTheme temaTexto;
+  final VoidCallback? aoEsqueceuSenha;
 
   @override
-  State<LoginCredentialsCard> createState() => _LoginCredentialsCardState();
+  State<CartaoCredenciais> createState() => _CartaoCredenciaisState();
 }
 
-class _LoginCredentialsCardState extends State<LoginCredentialsCard> {
-  bool _obscurePassword = true;
+class _CartaoCredenciaisState extends State<CartaoCredenciais> {
+  bool _ocultarSenha = true;
 
-  static const double _radius = 14;
+  static const double _raio = 14;
 
-  InputDecoration _decoration({
-    required String hint,
-    required Widget prefix,
-    Widget? suffix,
+  InputDecoration _decoracao({
+    required String dica,
+    required Widget prefixo,
+    Widget? sufixo,
   }) {
-    final textTheme = widget.textTheme;
+    final temaTexto = widget.temaTexto;
     return InputDecoration(
-      hintText: hint,
-      hintStyle: textTheme.bodyMedium?.copyWith(
-        color: StudyFlowColors.labelGray.withValues(alpha: 0.45),
+      hintText: dica,
+      hintStyle: temaTexto.bodyMedium?.copyWith(
+        color: CoresAplicacao.cinzaRotulo.withValues(alpha: 0.45),
         fontSize: 15,
       ),
-      prefixIcon: prefix,
-      suffixIcon: suffix,
+      prefixIcon: prefixo,
+      suffixIcon: sufixo,
       filled: true,
-      fillColor: StudyFlowColors.inputFill,
+      fillColor: CoresAplicacao.preenchimentoCampo,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(_radius),
+        borderRadius: BorderRadius.circular(_raio),
         borderSide: BorderSide.none,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(_radius),
+        borderRadius: BorderRadius.circular(_raio),
         borderSide: BorderSide.none,
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(_radius),
-        borderSide: const BorderSide(color: StudyFlowColors.orange, width: 1.5),
+        borderRadius: BorderRadius.circular(_raio),
+        borderSide: const BorderSide(color: CoresAplicacao.laranja, width: 1.5),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       isDense: true,
@@ -62,8 +62,8 @@ class _LoginCredentialsCardState extends State<LoginCredentialsCard> {
 
   @override
   Widget build(BuildContext context) {
-    final labelStyle = widget.textTheme.labelLarge?.copyWith(
-      color: StudyFlowColors.labelGray,
+    final estiloRotulo = widget.temaTexto.labelLarge?.copyWith(
+      color: CoresAplicacao.cinzaRotulo,
       fontWeight: FontWeight.w600,
       fontSize: 14,
     );
@@ -86,10 +86,10 @@ class _LoginCredentialsCardState extends State<LoginCredentialsCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(StudyFlow.loginLabelEmail.texto, style: labelStyle),
+              Text(TextosAplicacao.loginRotuloEmail.texto, style: estiloRotulo),
               const SizedBox(height: 8),
               TextField(
-                controller: widget.emailController,
+                controller: widget.controladorEmail,
                 enabled: true,
                 readOnly: false,
                 keyboardType: TextInputType.emailAddress,
@@ -100,56 +100,56 @@ class _LoginCredentialsCardState extends State<LoginCredentialsCard> {
                 inputFormatters: [
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
-                style: widget.textTheme.bodyLarge?.copyWith(
-                  color: StudyFlowColors.preto,
+                style: widget.temaTexto.bodyLarge?.copyWith(
+                  color: CoresAplicacao.preto,
                   fontSize: 15,
                 ),
-                decoration: _decoration(
-                  hint: StudyFlow.loginHintEmail.texto,
-                  prefix: Icon(
+                decoration: _decoracao(
+                  dica: TextosAplicacao.loginDicaEmail.texto,
+                  prefixo: Icon(
                     Icons.mail_outline_rounded,
-                    color: StudyFlowColors.labelGray.withValues(alpha: 0.7),
+                    color: CoresAplicacao.cinzaRotulo.withValues(alpha: 0.7),
                     size: 22,
                   ),
                 ),
                 onSubmitted: (_) => FocusScope.of(context).nextFocus(),
               ),
               const SizedBox(height: 18),
-              Text(StudyFlow.loginLabelSenha.texto, style: labelStyle),
+              Text(TextosAplicacao.loginRotuloSenha.texto, style: estiloRotulo),
               const SizedBox(height: 8),
               TextField(
-                controller: widget.passwordController,
+                controller: widget.controladorSenha,
                 enabled: true,
                 readOnly: false,
-                obscureText: _obscurePassword,
+                obscureText: _ocultarSenha,
                 obscuringCharacter: '•',
-                keyboardType: _obscurePassword
+                keyboardType: _ocultarSenha
                     ? TextInputType.visiblePassword
                     : TextInputType.text,
                 textInputAction: TextInputAction.done,
                 enableSuggestions: false,
                 autocorrect: false,
                 autofillHints: const [AutofillHints.password],
-                style: widget.textTheme.bodyLarge?.copyWith(
-                  color: StudyFlowColors.preto,
+                style: widget.temaTexto.bodyLarge?.copyWith(
+                  color: CoresAplicacao.preto,
                   fontSize: 15,
                 ),
-                decoration: _decoration(
-                  hint: StudyFlow.loginHintSenha.texto,
-                  prefix: Icon(
+                decoration: _decoracao(
+                  dica: TextosAplicacao.loginDicaSenha.texto,
+                  prefixo: Icon(
                     Icons.lock_outline_rounded,
-                    color: StudyFlowColors.labelGray.withValues(alpha: 0.7),
+                    color: CoresAplicacao.cinzaRotulo.withValues(alpha: 0.7),
                     size: 22,
                   ),
-                  suffix: IconButton(
+                  sufixo: IconButton(
                     onPressed: () {
-                      setState(() => _obscurePassword = !_obscurePassword);
+                      setState(() => _ocultarSenha = !_ocultarSenha);
                     },
                     icon: Icon(
-                      _obscurePassword
+                      _ocultarSenha
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
-                      color: StudyFlowColors.labelGray.withValues(alpha: 0.75),
+                      color: CoresAplicacao.cinzaRotulo.withValues(alpha: 0.75),
                       size: 22,
                     ),
                     padding: EdgeInsets.zero,
@@ -165,19 +165,19 @@ class _LoginCredentialsCardState extends State<LoginCredentialsCard> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: widget.onForgotPassword,
+                  onPressed: widget.aoEsqueceuSenha,
                   style: TextButton.styleFrom(
-                    foregroundColor: StudyFlowColors.labelGray,
+                    foregroundColor: CoresAplicacao.cinzaRotulo,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 4,
                       vertical: 4,
                     ),
-                    textStyle: widget.textTheme.bodySmall?.copyWith(
+                    textStyle: widget.temaTexto.bodySmall?.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 13,
                     ),
                   ),
-                  child: Text(StudyFlow.loginEsqueceuSenha.texto),
+                  child: Text(TextosAplicacao.loginEsqueceuSenha.texto),
                 ),
               ),
             ],

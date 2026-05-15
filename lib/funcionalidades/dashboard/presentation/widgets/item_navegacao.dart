@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:study_flow/core/theme/study_flow_colors.dart';
+import 'package:study_flow/core/theme/cores_aplicacao.dart';
 
 class ItemNavegacao extends StatelessWidget {
   const ItemNavegacao({
@@ -19,7 +19,7 @@ class ItemNavegacao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cor =
-        selecionado ? StudyFlowColors.orange : StudyFlowColors.preto;
+        selecionado ? CoresAplicacao.laranja : CoresAplicacao.preto;
 
     return InkWell(
       onTap: aoTocar,
@@ -38,7 +38,7 @@ class ItemNavegacao extends StatelessWidget {
                   width: 8,
                   height: 8,
                   decoration: const BoxDecoration(
-                    color: StudyFlowColors.orange,
+                    color: CoresAplicacao.laranja,
                     shape: BoxShape.circle,
                   ),
                 ),
