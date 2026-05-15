@@ -4,11 +4,7 @@ import 'package:study_flow/core/strings/textos_aplicacao.dart';
 import 'package:study_flow/core/theme/cores_aplicacao.dart';
 
 class RodapeCadastro extends StatelessWidget {
-  const RodapeCadastro({
-    super.key,
-    required this.temaTexto,
-    this.aoCadastrese,
-  });
+  const RodapeCadastro({super.key, required this.temaTexto, this.aoCadastrese});
 
   final TextTheme temaTexto;
   final VoidCallback? aoCadastrese;
