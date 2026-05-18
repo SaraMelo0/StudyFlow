@@ -23,7 +23,6 @@ class CardSequencia extends StatelessWidget {
 
             decoration: BoxDecoration(
               color: CoresAplicacao.cartaoPessego,
-
               shape: BoxShape.circle,
             ),
 
