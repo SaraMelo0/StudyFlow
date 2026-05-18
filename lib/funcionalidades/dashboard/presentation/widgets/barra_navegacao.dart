@@ -16,7 +16,7 @@ class BarraNavegacao extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFFFFFFF).withValues(alpha: 0.45),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.06),

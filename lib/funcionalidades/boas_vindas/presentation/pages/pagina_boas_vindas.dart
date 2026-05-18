@@ -43,7 +43,7 @@ class PaginaBoasVindas extends StatelessWidget {
                           TextosAplicacao.textoBemVindo.texto,
                           textAlign: TextAlign.center,
                           style: temaTexto.titleMedium?.copyWith(
-                            color: CoresAplicacao.preto,
+                            color: CoresAplicacao.marromEscuro,
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                             height: 1.35,
@@ -112,7 +112,7 @@ class PaginaBoasVindas extends StatelessWidget {
                           TextosAplicacao.textoRodape.texto,
                           textAlign: TextAlign.center,
                           style: temaTexto.bodyMedium?.copyWith(
-                            color: CoresAplicacao.marromSuave,
+                            color: CoresAplicacao.marromEscuro,
                             fontWeight: FontWeight.w500,
                             height: 1.45,
                             fontSize: 13.5,

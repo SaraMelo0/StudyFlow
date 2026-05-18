@@ -17,7 +17,7 @@ class RodapeCadastro extends StatelessWidget {
         Text(
           TextosAplicacao.loginSemContaPrefixo.texto,
           style: temaTexto.bodyMedium?.copyWith(
-            color: CoresAplicacao.preto,
+            color: CoresAplicacao.marromEscuro,
             fontWeight: FontWeight.w500,
             fontSize: 14,
           ),
