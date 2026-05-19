@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:study_flow/coordinator/rotas_navegacao.dart';
+import 'package:study_flow/funcionalidades/cadastro/presentation/pages/pagina_cadastro.dart';
 import 'package:study_flow/funcionalidades/login/presentation/pages/pagina_login.dart';
 import 'package:study_flow/app/pagina_principal.dart';
 
@@ -13,6 +14,13 @@ final class CoordenadorNavegacao {
     );
   }
 
+  MaterialPageRoute<void> _rotaCadastro() {
+    return MaterialPageRoute<void>(
+      builder: (_) => const PaginaCadastro(),
+      settings: RouteSettings(name: RotasNavegacao.cadastro.rota),
+    );
+  }
+
   MaterialPageRoute<void> _rotaDashboard() {
     return MaterialPageRoute<void>(
       builder: (_) => const PaginaPrincipal(),
@@ -22,6 +30,13 @@ final class CoordenadorNavegacao {
 
   Future<void> mostrarLogin(BuildContext contexto) {
     return Navigator.of(contexto, rootNavigator: true).push<void>(_rotaLogin());
+  }
+
+  Future<void> mostrarCadastro(BuildContext contexto) {
+    return Navigator.of(
+      contexto,
+      rootNavigator: true,
+    ).push<void>(_rotaCadastro());
   }
 
   Future<void> mostrarDashboard(BuildContext contexto) {

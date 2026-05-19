@@ -4,29 +4,34 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:study_flow/coordinator/coordenador_navegacao.dart';
 import 'package:study_flow/core/strings/textos_aplicacao.dart';
 import 'package:study_flow/core/theme/cores_aplicacao.dart';
-import 'package:study_flow/core/widgets/cabecalho_logo.dart';
-import 'package:study_flow/funcionalidades/login/presentation/widgets/cartao_credenciais.dart';
-import 'package:study_flow/funcionalidades/login/presentation/widgets/rodape_cadastro.dart';
-import 'package:study_flow/funcionalidades/login/presentation/widgets/secao_login_social.dart';
 import 'package:study_flow/core/widgets/botao_principal.dart';
+import 'package:study_flow/core/widgets/cabecalho_logo.dart';
+import 'package:study_flow/funcionalidades/cadastro/presentation/widgets/cartao_dados_cadastro.dart';
+import 'package:study_flow/funcionalidades/cadastro/presentation/widgets/rodape_login.dart';
+import 'package:study_flow/funcionalidades/cadastro/presentation/widgets/secao_aceite_termos.dart';
 
 const double _larguraMaximaConteudo = 420;
 
-class PaginaLogin extends StatefulWidget {
-  const PaginaLogin({super.key});
+class PaginaCadastro extends StatefulWidget {
+  const PaginaCadastro({super.key});
 
   @override
-  State<PaginaLogin> createState() => _PaginaLoginEstado();
+  State<PaginaCadastro> createState() => _PaginaCadastroEstado();
 }
 
-class _PaginaLoginEstado extends State<PaginaLogin> {
+class _PaginaCadastroEstado extends State<PaginaCadastro> {
+  final _controladorNome = TextEditingController();
   final _controladorEmail = TextEditingController();
   final _controladorSenha = TextEditingController();
+  final _controladorConfirmarSenha = TextEditingController();
+  bool _aceitouTermos = false;
 
   @override
   void dispose() {
+    _controladorNome.dispose();
     _controladorEmail.dispose();
     _controladorSenha.dispose();
+    _controladorConfirmarSenha.dispose();
     super.dispose();
   }
 
@@ -37,8 +42,13 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
     );
   }
 
-  void _aoEntrar() {
+  void _aoCadastrar() {
+    if (!_aceitouTermos) return;
     EscopoCoordenadorNavegacao.de(context).mostrarDashboard(context);
+  }
+
+  void _aoEntrar() {
+    EscopoCoordenadorNavegacao.de(context).voltar(context);
   }
 
   @override
@@ -75,7 +85,7 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          TextosAplicacao.loginTitulo.texto,
+                          TextosAplicacao.cadastroTitulo.texto,
                           textAlign: TextAlign.center,
                           style: temaTexto.headlineSmall?.copyWith(
                             color: CoresAplicacao.laranja,
@@ -86,41 +96,48 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          TextosAplicacao.loginSubtitulo.texto,
+                          TextosAplicacao.cadastroSubtitulo.texto,
                           textAlign: TextAlign.center,
                           style: temaTexto.titleMedium?.copyWith(
-                            color: CoresAplicacao.preto,
+                            color: CoresAplicacao.marromEscuro,
                             fontWeight: FontWeight.w600,
                             fontSize: 15,
                             height: 1.35,
                           ),
                         ),
                         const SizedBox(height: 24),
-                        CartaoCredenciais(
+                        CartaoDadosCadastro(
+                          controladorNome: _controladorNome,
                           controladorEmail: _controladorEmail,
                           controladorSenha: _controladorSenha,
+                          controladorConfirmarSenha: _controladorConfirmarSenha,
                           temaTexto: temaTexto,
-                          aoEsqueceuSenha: _mostrarEmBreve,
                         ),
                         const SizedBox(height: 20),
-                        BotaoPrincipal(
-                          rotulo: TextosAplicacao.loginBotaoConfirmar.texto,
+                        SecaoAceiteTermos(
                           temaTexto: temaTexto,
-                          aoPressionar: _aoEntrar,
-                        ),
-                        const SizedBox(height: 28),
-                        SecaoLoginSocial(
-                          temaTexto: temaTexto,
-                          aoAutenticacaoSocial: _mostrarEmBreve,
-                        ),
-                        SizedBox(height: 32 + margemInferior),
-                        RodapeCadastro(
-                          temaTexto: temaTexto,
-                          aoCadastrese: () {
-                            EscopoCoordenadorNavegacao.de(
-                              context,
-                            ).mostrarCadastro(context);
+                          aceito: _aceitouTermos,
+                          aoAlterarAceite: (valor) {
+                            setState(() => _aceitouTermos = valor ?? false);
                           },
+                          aoTermosUso: _mostrarEmBreve,
+                          aoPoliticaPrivacidade: _mostrarEmBreve,
+                        ),
+                        const SizedBox(height: 20),
+                        Opacity(
+                          opacity: _aceitouTermos ? 1 : 0.55,
+                          child: BotaoPrincipal(
+                            rotulo: TextosAplicacao.cadastroBotaoConfirmar.texto,
+                            temaTexto: temaTexto,
+                            aoPressionar: _aceitouTermos ? _aoCadastrar : () {},
+                          ),
+                        ),
+                        SizedBox(height: 28 + margemInferior),
+                        RodapeLogin(
+                          temaTexto: temaTexto,
+                          aoEntrar: _aoEntrar,
+                          aoTermosUso: _mostrarEmBreve,
+                          aoPoliticaPrivacidade: _mostrarEmBreve,
                         ),
                         const SizedBox(height: 16),
                       ],
