@@ -4,6 +4,7 @@ abstract final class CoresAplicacao {
   CoresAplicacao._();
 
   static const Color laranja = Color(0xFFF97316);
+  static const Color laranjaSuave = Color(0xFFFF8E40);
   static const Color preto = Color(0xFF000000);
   static const Color marromEscuro = Color(0xFF562300);
   static const Color fundo = Color(0xFFF2F2F2);

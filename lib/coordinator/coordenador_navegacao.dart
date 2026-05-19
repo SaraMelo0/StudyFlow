@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:study_flow/coordinator/rotas_navegacao.dart';
 import 'package:study_flow/funcionalidades/login/presentation/pages/pagina_login.dart';
-import 'package:study_flow/funcionalidades/dashboard/presentation/pages/pagina_dashboard.dart';
+import 'package:study_flow/app/pagina_principal.dart';
 
 final class CoordenadorNavegacao {
   CoordenadorNavegacao();
@@ -15,7 +15,7 @@ final class CoordenadorNavegacao {
 
   MaterialPageRoute<void> _rotaDashboard() {
     return MaterialPageRoute<void>(
-      builder: (_) => const PaginaDashboard(),
+      builder: (_) => const PaginaPrincipal(),
       settings: RouteSettings(name: RotasNavegacao.dashboard.rota),
     );
   }
@@ -23,15 +23,17 @@ final class CoordenadorNavegacao {
   Future<void> mostrarLogin(BuildContext contexto) {
     return Navigator.of(contexto, rootNavigator: true).push<void>(_rotaLogin());
   }
+
   Future<void> mostrarDashboard(BuildContext contexto) {
-    return Navigator.of(contexto, rootNavigator: true)
-        .pushReplacement<void, void>(_rotaDashboard());
+    return Navigator.of(
+      contexto,
+      rootNavigator: true,
+    ).pushReplacement<void, void>(_rotaDashboard());
   }
 
   void voltar(BuildContext contexto) {
     Navigator.of(contexto, rootNavigator: true).maybePop();
   }
-
 }
 
 final class EscopoCoordenadorNavegacao extends InheritedWidget {
@@ -39,7 +41,6 @@ final class EscopoCoordenadorNavegacao extends InheritedWidget {
     super.key,
     required this.coordenador,
     required super.child,
-
   });
 
   final CoordenadorNavegacao coordenador;
@@ -58,4 +59,3 @@ final class EscopoCoordenadorNavegacao extends InheritedWidget {
   bool updateShouldNotify(EscopoCoordenadorNavegacao antigo) =>
       coordenador != antigo.coordenador;
 }
-

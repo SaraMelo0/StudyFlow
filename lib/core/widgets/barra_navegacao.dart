@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/item_navegacao.dart';
+import 'package:study_flow/core/widgets/item_navegacao.dart';
 
 class BarraNavegacao extends StatelessWidget {
   const BarraNavegacao({
