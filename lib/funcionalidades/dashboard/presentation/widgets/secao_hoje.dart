@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:study_flow/core/strings/textos_aplicacao.dart';
-
 import 'package:study_flow/core/theme/cores_aplicacao.dart';
-
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_hoje.dart';
-
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_dashboard.dart';
 
 class SecaoHoje extends StatelessWidget {
@@ -17,21 +14,15 @@ class SecaoHoje extends StatelessWidget {
   Widget build(BuildContext context) {
     return CardDashboard(
       raioBorda: 28,
-
       preenchimento: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-
       filho: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-
         children: [
           Text(
             TextosAplicacao.dashboardHoje.texto,
-
             style: temaTexto.titleLarge?.copyWith(
               color: CoresAplicacao.preto,
-
               fontWeight: FontWeight.w800,
-
               fontSize: 18,
             ),
           ),
@@ -43,9 +34,7 @@ class SecaoHoje extends StatelessWidget {
               Expanded(
                 child: CardHoje(
                   valor: TextosAplicacao.dashboardTempoEstudado.texto,
-
                   rotulo: TextosAplicacao.dashboardTempoEstudadoRotulo.texto,
-
                   temaTexto: temaTexto,
                 ),
               ),
@@ -55,10 +44,8 @@ class SecaoHoje extends StatelessWidget {
               Expanded(
                 child: CardHoje(
                   valor: TextosAplicacao.dashboardSessoesConcluidas.texto,
-
                   rotulo:
                       TextosAplicacao.dashboardSessoesConcluidasRotulo.texto,
-
                   temaTexto: temaTexto,
                 ),
               ),
