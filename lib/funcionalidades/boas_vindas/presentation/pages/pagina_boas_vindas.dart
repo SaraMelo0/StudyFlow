@@ -88,7 +88,7 @@ class PaginaBoasVindas extends StatelessWidget {
                                 color: CoresAplicacao.laranja,
                                 width: 1.5,
                               ),
-                              backgroundColor: Colors.white,
+                              backgroundColor: CoresAplicacao.fundo,
                               elevation: 0,
                               shadowColor: Colors.transparent,
                               shape: RoundedRectangleBorder(

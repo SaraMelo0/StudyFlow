@@ -25,12 +25,9 @@ class CardProgressoSemanal extends StatelessWidget {
               Expanded(
                 child: Text(
                   TextosAplicacao.dashboardProgressoSemanal.texto,
-
                   style: temaTexto.titleMedium?.copyWith(
                     color: CoresAplicacao.preto,
-
                     fontWeight: FontWeight.w800,
-
                     fontSize: 16,
                   ),
                 ),
@@ -38,9 +35,7 @@ class CardProgressoSemanal extends StatelessWidget {
 
               const Icon(
                 Icons.trending_up_rounded,
-
                 color: CoresAplicacao.laranja,
-
                 size: 22,
               ),
             ],
@@ -53,12 +48,9 @@ class CardProgressoSemanal extends StatelessWidget {
               Expanded(
                 child: Text(
                   TextosAplicacao.dashboardProgressoHoras.texto,
-
                   style: temaTexto.bodyMedium?.copyWith(
                     color: CoresAplicacao.cinzaRotulo,
-
                     fontWeight: FontWeight.w600,
-
                     fontSize: 13,
                   ),
                 ),
@@ -66,12 +58,9 @@ class CardProgressoSemanal extends StatelessWidget {
 
               Text(
                 TextosAplicacao.dashboardProgressoPercentual.texto,
-
                 style: temaTexto.titleMedium?.copyWith(
                   color: CoresAplicacao.cinzaRotulo,
-
                   fontWeight: FontWeight.w700,
-
                   fontSize: 14,
                 ),
               ),
@@ -85,12 +74,9 @@ class CardProgressoSemanal extends StatelessWidget {
 
             child: const LinearProgressIndicator(
               value: 0.83,
-
               minHeight: 10,
-
               backgroundColor: CoresAplicacao.trilhoProgresso,
-
-              color: CoresAplicacao.laranja,
+              color: CoresAplicacao.laranjaSuave,
             ),
           ),
 
@@ -98,7 +84,6 @@ class CardProgressoSemanal extends StatelessWidget {
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
             children: _rotulosDias
                 .map(
                   (rotulo) => Text(
@@ -106,9 +91,7 @@ class CardProgressoSemanal extends StatelessWidget {
 
                     style: temaTexto.labelSmall?.copyWith(
                       color: CoresAplicacao.cinzaRotulo,
-
                       fontWeight: FontWeight.w600,
-
                       fontSize: 11,
                     ),
                   ),

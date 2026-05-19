@@ -47,9 +47,7 @@ class CardSequencia extends StatelessWidget {
 
                   style: temaTexto.titleMedium?.copyWith(
                     color: CoresAplicacao.preto,
-
-                    fontWeight: FontWeight.w800,
-
+                    fontWeight: FontWeight.w400,
                     fontSize: 17,
                   ),
                 ),
