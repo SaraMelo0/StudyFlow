@@ -55,7 +55,22 @@ enum TextosAplicacao {
   dashboardProximaMeta('Próxima meta'),
   dashboardVer('Ver'),
   dashboardMetaTitulo('Concluir UX/UI'),
-  dashboardMetaPrazo('Prazo: 31/03/2026');
+  dashboardMetaPrazo('Prazo: 31/03/2026'),
+
+  historicoTitulo('Histórico de Sessões'),
+  historicoSessoesRotulo('Sessões'),
+  historicoTempoTotalRotulo('Tempo Total'),
+  historicoAvisoTitulo('Atenção:'),
+  historicoAvisoCorpo(
+    'Excluir uma sessão irá diminuir o tempo total estudado da matéria e atualizar suas estatísticas diárias. Esta ação não pode ser desfeita.',
+  ),
+  historicoConfirmarExclusaoTitulo('Excluir sessão?'),
+  historicoConfirmarExclusaoCorpo(
+    'Esta sessão será removida permanentemente do seu histórico.',
+  ),
+  historicoConfirmarExclusaoBotao('Excluir'),
+  historicoCancelar('Cancelar'),
+  historicoSessaoExcluida('Sessão excluída.');
 
   const TextosAplicacao(this.texto);
   final String texto;
