@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:study_flow/app/pagina_principal.dart';
 import 'package:study_flow/coordinator/rotas_navegacao.dart';
 import 'package:study_flow/funcionalidades/login/presentation/pages/pagina_login.dart';
+
 final class CoordenadorNavegacao {
   NavigatorState _navegador(BuildContext contexto) =>
       Navigator.of(contexto, rootNavigator: true);
