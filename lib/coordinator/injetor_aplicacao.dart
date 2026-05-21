@@ -1,7 +1,7 @@
 import 'package:study_flow/coordinator/coordenador_navegacao.dart';
 
-final class InjecaoAplicacao {
-  InjecaoAplicacao();
+final injecaoAplicacao = InjecaoAplicacao();
 
-  late final CoordenadorNavegacao coordenador = CoordenadorNavegacao();
+final class InjecaoAplicacao {
+  final CoordenadorNavegacao coordenador = CoordenadorNavegacao();
 }
