@@ -22,21 +22,21 @@ class SecaoLoginSocial extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Divider(color: CoresAplicacao.divisorSuave, thickness: 1),
+              child: Divider(color: CoresAplicacao.cinzaClaro, thickness: 1),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Text(
                 TextosAplicacao.loginOuContinueCom.texto,
                 style: temaTexto.bodySmall?.copyWith(
-                  color: CoresAplicacao.divisorSuave,
+                  color: CoresAplicacao.cinzaClaro,
                   fontWeight: FontWeight.w600,
                   fontSize: 13,
                 ),
               ),
             ),
             Expanded(
-              child: Divider(color: CoresAplicacao.divisorSuave, thickness: 1),
+              child: Divider(color: CoresAplicacao.cinzaClaro, thickness: 1),
             ),
           ],
         ),

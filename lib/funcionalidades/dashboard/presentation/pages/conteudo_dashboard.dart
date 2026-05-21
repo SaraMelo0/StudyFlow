@@ -10,21 +10,23 @@ import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_s
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/linha_estatisticas.dart';
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/secao_hoje.dart';
 
-/// Conteúdo da aba inicial (dashboard), exibido dentro de [PaginaPrincipal].
 class ConteudoDashboard extends StatelessWidget {
-  const ConteudoDashboard({super.key, required this.aoMostrarEmBreve});
+  const ConteudoDashboard({
+    super.key,
+    required this.aoMostrarEmBreve,
+    required this.aoVerMeta,
+  });
 
   final VoidCallback aoMostrarEmBreve;
-
-  static const double _espacoInferiorBarra = 88;
+  final VoidCallback aoVerMeta;
 
   @override
   Widget build(BuildContext context) {
     final temaTexto = GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme);
-
     return SafeArea(
+      bottom: false,
       child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, _espacoInferiorBarra),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -49,7 +51,7 @@ class ConteudoDashboard extends StatelessWidget {
             const SizedBox(height: 20),
             LinhaEstatisticas(temaTexto: temaTexto),
             const SizedBox(height: 16),
-            CardProximaMeta(temaTexto: temaTexto, aoVer: aoMostrarEmBreve),
+            CardProximaMeta(temaTexto: temaTexto, aoVer: aoVerMeta),
           ],
         ),
       ),
