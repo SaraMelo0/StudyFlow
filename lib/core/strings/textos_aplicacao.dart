@@ -76,7 +76,21 @@ enum TextosAplicacao {
   dashboardProximaMeta('Próxima meta'),
   dashboardVer('Ver'),
   dashboardMetaTitulo('Concluir UX/UI'),
-  dashboardMetaPrazo('Prazo: 31/03/2026');
+  dashboardMetaPrazo('Prazo: 31/03/2026'),
+
+  materiasTitulo('Minhas Matérias'),
+  materiasSubtituloSingular('1 matéria cadastrada'),
+  materiasSubtituloPlural('matérias cadastradas'),
+  materiasHorasEstudadas(' horas estudadas'),
+  materiasProgresso('Progresso'),
+  materiasDialogoNova('Nova Matéria'),
+  materiasDialogoEditar('Editar Matéria'),
+  materiasRotuloNome('Nome da matéria'),
+  materiasDicaNome('Ex: Álgebra Linear'),
+  materiasRotuloProgresso('Progresso (%)'),
+  materiasCancelar('Cancelar'),
+  materiasAdicionar('Adicionar'),
+  materiasSalvar('Salvar');
 
   const TextosAplicacao(this.texto);
   final String texto;

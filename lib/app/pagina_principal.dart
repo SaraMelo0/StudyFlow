@@ -4,6 +4,7 @@ import 'package:study_flow/core/strings/textos_aplicacao.dart';
 import 'package:study_flow/core/theme/cores_aplicacao.dart';
 import 'package:study_flow/core/widgets/barra_navegacao.dart';
 import 'package:study_flow/funcionalidades/dashboard/presentation/pages/conteudo_dashboard.dart';
+import 'package:study_flow/funcionalidades/materias/presentation/pages/conteudo_materias.dart';
 
 /// Shell com barra de navegação inferior compartilhada por todas as abas do app.
 class PaginaPrincipal extends StatefulWidget {
@@ -25,8 +26,8 @@ class _PaginaPrincipalEstado extends State<PaginaPrincipal> {
 
   void _aoTocarBarra(int indice) {
     if (indice == _indiceNavegacao) return;
-    if (indice == 0) {
-      setState(() => _indiceNavegacao = 0);
+    if (indice == 0 || indice == 1) {
+      setState(() => _indiceNavegacao = indice);
       return;
     }
     _mostrarEmBreve();
@@ -41,7 +42,7 @@ class _PaginaPrincipalEstado extends State<PaginaPrincipal> {
         index: _indiceNavegacao,
         children: [
           ConteudoDashboard(aoMostrarEmBreve: _mostrarEmBreve),
-          const _AbaEmBreve(),
+          const ConteudoMaterias(),
           const _AbaEmBreve(),
           const _AbaEmBreve(),
           const _AbaEmBreve(),

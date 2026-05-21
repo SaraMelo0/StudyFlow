@@ -45,7 +45,7 @@ class SecaoAceiteTermos extends StatelessWidget {
             child: TextoLinksCadastro(
               temaTexto: temaTexto,
               tamanhoFonte: 13,
-              corTexto: CoresAplicacao.cinzaRotulo,
+              corTexto: CoresAplicacao.marromEscuro,
               partes: [
                 ParteTextoCadastro(TextosAplicacao.cadastroAceiteTermosPrefixo.texto),
                 ParteTextoCadastro(

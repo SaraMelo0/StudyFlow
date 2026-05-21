@@ -63,7 +63,7 @@ class CartaoDadosCadastro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final estiloRotulo = temaTexto.labelLarge?.copyWith(
-      color: CoresAplicacao.marromEscuro,
+      color: CoresAplicacao.preto,
       fontWeight: FontWeight.w700,
       fontSize: 14,
     );

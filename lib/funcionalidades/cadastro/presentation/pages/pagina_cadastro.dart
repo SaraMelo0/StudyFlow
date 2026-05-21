@@ -48,7 +48,7 @@ class _PaginaCadastroEstado extends State<PaginaCadastro> {
   }
 
   void _aoEntrar() {
-    EscopoCoordenadorNavegacao.de(context).voltar(context);
+    EscopoCoordenadorNavegacao.de(context).substituirPorLogin(context);
   }
 
   @override

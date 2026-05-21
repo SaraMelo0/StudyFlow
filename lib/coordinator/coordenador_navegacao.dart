@@ -32,6 +32,13 @@ final class CoordenadorNavegacao {
     return Navigator.of(contexto, rootNavigator: true).push<void>(_rotaLogin());
   }
 
+  Future<void> substituirPorLogin(BuildContext contexto) {
+    return Navigator.of(
+      contexto,
+      rootNavigator: true,
+    ).pushReplacement<void, void>(_rotaLogin());
+  }
+
   Future<void> mostrarCadastro(BuildContext contexto) {
     return Navigator.of(
       contexto,
