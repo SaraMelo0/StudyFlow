@@ -99,11 +99,8 @@ class PaginaBoasVindas extends StatelessWidget {
                                 fontSize: 16,
                               ),
                             ),
-                            onPressed: () {
-                              EscopoCoordenadorNavegacao.de(
-                                contextoBoasVindas,
-                              ).mostrarLogin(contextoBoasVindas);
-                            },
+                            onPressed: () => contextoBoasVindas.coordenador
+                                .mostrarLogin(contextoBoasVindas),
                             child: Text(TextosAplicacao.jaTenhoConta.texto),
                           ),
                         ),
