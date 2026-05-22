@@ -63,8 +63,8 @@ class _CartaoCredenciaisState extends State<CartaoCredenciais> {
   @override
   Widget build(BuildContext context) {
     final estiloRotulo = widget.temaTexto.labelLarge?.copyWith(
-      color: CoresAplicacao.cinzaRotulo,
-      fontWeight: FontWeight.w600,
+      color: CoresAplicacao.preto,
+      fontWeight: FontWeight.w700,
       fontSize: 14,
     );
 
