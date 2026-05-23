@@ -90,7 +90,10 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
               aoAutenticacaoSocial: _mostrarEmBreve,
             ),
             SizedBox(height: 32 + margemInferior),
-            RodapeCadastro(temaTexto: temaTexto, aoCadastrese: _mostrarEmBreve),
+            RodapeCadastro(
+              temaTexto: temaTexto,
+              aoCadastrese: () => context.coordenador.mostrarCadastro(context),
+            ),
             const SizedBox(height: 16),
           ],
         ),
