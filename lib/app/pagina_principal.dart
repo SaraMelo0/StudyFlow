@@ -6,6 +6,7 @@ import 'package:study_flow/core/theme/cores_aplicacao.dart';
 import 'package:study_flow/core/widgets/barra_navegacao.dart';
 import 'package:study_flow/core/widgets/dialogo_confirmar_sair_conta.dart';
 import 'package:study_flow/funcionalidades/dashboard/presentation/pages/conteudo_dashboard.dart';
+import 'package:study_flow/funcionalidades/materias/presentation/pages/conteudo_materias.dart';
 import 'package:study_flow/funcionalidades/perfil/presentation/pages/conteudo_perfil.dart';
 
 class PaginaPrincipal extends StatefulWidget {
@@ -36,7 +37,7 @@ class _PaginaPrincipalEstado extends State<PaginaPrincipal> {
 
   void _aoTocarBarra(int indice) {
     if (indice == _indiceNavegacao) return;
-    if (indice == 0 || indice == _indicePerfil) {
+    if (indice == 0 || indice == 1 || indice == _indicePerfil) {
       setState(() => _indiceNavegacao = indice);
       return;
     }
@@ -63,7 +64,7 @@ class _PaginaPrincipalEstado extends State<PaginaPrincipal> {
             aoMostrarEmBreve: _mostrarEmBreve,
             aoVerMeta: _irParaMetasNoPerfil,
           ),
-          const _AbaEmBreve(),
+          const ConteudoMaterias(),
           const _AbaEmBreve(),
           const _AbaEmBreve(),
           ConteudoPerfil(
