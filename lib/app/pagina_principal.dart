@@ -25,7 +25,6 @@ class _PaginaPrincipalEstado extends State<PaginaPrincipal> {
   int _indiceNavegacao = 0;
 
   final _chavePerfil = GlobalKey<ConteudoPerfilEstado>();
-
   final List<Notificacao> _notificacoes = criarNotificacoesIniciais();
 
   bool get _temNotificacoesNaoLidas => temNotificacoesNaoLidas(_notificacoes);

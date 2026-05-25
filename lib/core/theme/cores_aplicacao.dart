@@ -14,6 +14,7 @@ abstract final class CoresAplicacao {
   static const Color cinzaEscuro = Color(0xFF525252);
   static const Color cinzaMedio = Color(0xFF666666);
   static const Color cinzaClaro = Color(0xFF8F8F8F);
+  static const Color divisorSuave = cinzaClaro;
   static const Color cinzaPale = Color(0xFFB8B8B8);
   static const Color cartaoPessego = Color(0xFFFFF1E8);
   static const Color trilhoProgresso = Color(0xFFFFC094);
