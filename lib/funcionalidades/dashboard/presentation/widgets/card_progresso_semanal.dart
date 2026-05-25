@@ -45,7 +45,7 @@ class CardProgressoSemanal extends StatelessWidget {
                 child: Text(
                   TextosAplicacao.dashboardProgressoHoras.texto,
                   style: temaTexto.bodyMedium?.copyWith(
-                    color: CoresAplicacao.cinzaRotulo,
+                    color: CoresAplicacao.cinzaMedio,
                     fontWeight: FontWeight.w600,
                     fontSize: 13,
                   ),
@@ -55,7 +55,7 @@ class CardProgressoSemanal extends StatelessWidget {
               Text(
                 TextosAplicacao.dashboardProgressoPercentual.texto,
                 style: temaTexto.titleMedium?.copyWith(
-                  color: CoresAplicacao.cinzaRotulo,
+                  color: CoresAplicacao.cinzaMedio,
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
                 ),
@@ -86,7 +86,7 @@ class CardProgressoSemanal extends StatelessWidget {
                     rotulo,
 
                     style: temaTexto.labelSmall?.copyWith(
-                      color: CoresAplicacao.cinzaRotulo,
+                      color: CoresAplicacao.cinzaMedio,
                       fontWeight: FontWeight.w600,
                       fontSize: 11,
                     ),
