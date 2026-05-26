@@ -20,34 +20,24 @@ final class CoordenadorNavegacao {
     BuildContext contexto,
     RotasNavegacao rota,
     Widget pagina,
-  ) =>
-      _navegador(contexto).pushReplacement<void, void>(_rota(rota, pagina));
+  ) => _navegador(contexto).pushReplacement<void, void>(_rota(rota, pagina));
 
   Future<void> mostrarLogin(BuildContext contexto) => _navegador(
-        contexto,
-      ).push<void>(_rota(RotasNavegacao.login, const PaginaLogin()));
+    contexto,
+  ).push<void>(_rota(RotasNavegacao.login, const PaginaLogin()));
 
   Future<void> mostrarCadastro(BuildContext contexto) => _navegador(
-        contexto,
-      ).push<void>(_rota(RotasNavegacao.cadastro, const PaginaCadastro()));
+    contexto,
+  ).push<void>(_rota(RotasNavegacao.cadastro, const PaginaCadastro()));
 
-  Future<void> substituirPorLogin(BuildContext contexto) => _substituir(
-        contexto,
-        RotasNavegacao.login,
-        const PaginaLogin(),
-      );
+  Future<void> substituirPorLogin(BuildContext contexto) =>
+      _substituir(contexto, RotasNavegacao.login, const PaginaLogin());
 
-  Future<void> mostrarDashboard(BuildContext contexto) => _substituir(
-        contexto,
-        RotasNavegacao.dashboard,
-        const PaginaPrincipal(),
-      );
+  Future<void> mostrarDashboard(BuildContext contexto) =>
+      _substituir(contexto, RotasNavegacao.dashboard, const PaginaPrincipal());
 
-  Future<void> sairConta(BuildContext contexto) => _substituir(
-        contexto,
-        RotasNavegacao.login,
-        const PaginaLogin(),
-      );
+  Future<void> sairConta(BuildContext contexto) =>
+      _substituir(contexto, RotasNavegacao.login, const PaginaLogin());
 
   void voltar(BuildContext contexto) => _navegador(contexto).maybePop();
 }
@@ -61,8 +51,7 @@ final class EscopoCoordenadorNavegacao extends InheritedWidget {
 
   final CoordenadorNavegacao coordenador;
 
-  static CoordenadorNavegacao de(BuildContext contexto) =>
-      contexto.coordenador;
+  static CoordenadorNavegacao de(BuildContext contexto) => contexto.coordenador;
 
   @override
   bool updateShouldNotify(EscopoCoordenadorNavegacao antigo) =>

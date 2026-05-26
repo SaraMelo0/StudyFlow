@@ -47,9 +47,7 @@ enum TextosAplicacao {
   cadastroBotaoConfirmar('Criar Conta'),
   cadastroJaTemContaPrefixo('Já tem uma conta? '),
   cadastroFazerLogin('Fazer login'),
-  cadastroAvisoLegalPrefixo(
-    'Ao criar uma conta, você concorda com nossos ',
-  ),
+  cadastroAvisoLegalPrefixo('Ao criar uma conta, você concorda com nossos '),
   cadastroAvisoLegalMeio(' e '),
   funcionalidadeEmBreve('Esta função ainda será implementada.'),
 
@@ -77,7 +75,6 @@ enum TextosAplicacao {
   dashboardVer('Ver'),
   dashboardMetaTitulo('Concluir UX/UI'),
   dashboardMetaPrazo('Prazo: 31/03/2026'),
-
   materiasTitulo('Minhas Matérias'),
   materiasSubtituloSingular('1 matéria cadastrada'),
   materiasSubtituloPlural('matérias cadastradas'),
@@ -91,7 +88,6 @@ enum TextosAplicacao {
   materiasCancelar('Cancelar'),
   materiasAdicionar('Adicionar'),
   materiasSalvar('Salvar'),
-
   perfilTitulo('Perfil & Metas'),
   perfilSubtitulo('Defina e acompanhe seus objetivos'),
   perfilNome('Junior Moura'),
