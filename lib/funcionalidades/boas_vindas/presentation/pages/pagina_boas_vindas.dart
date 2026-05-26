@@ -74,8 +74,11 @@ class PaginaBoasVindas extends StatelessWidget {
                         BotaoPrincipal(
                           rotulo: TextosAplicacao.comecarAgora.texto,
                           temaTexto: temaTexto,
-                          // TODO: navegar para a tela de cadastro.
-                          aoPressionar: () {},
+                          aoPressionar: () {
+                            EscopoCoordenadorNavegacao.de(
+                              contextoBoasVindas,
+                            ).mostrarCadastro(contextoBoasVindas);
+                          },
                         ),
                         const SizedBox(height: 12),
                         SizedBox(
@@ -99,11 +102,8 @@ class PaginaBoasVindas extends StatelessWidget {
                                 fontSize: 16,
                               ),
                             ),
-                            onPressed: () {
-                              EscopoCoordenadorNavegacao.de(
-                                contextoBoasVindas,
-                              ).mostrarLogin(contextoBoasVindas);
-                            },
+                            onPressed: () => contextoBoasVindas.coordenador
+                                .mostrarLogin(contextoBoasVindas),
                             child: Text(TextosAplicacao.jaTenhoConta.texto),
                           ),
                         ),

@@ -7,10 +7,12 @@ class BarraNavegacao extends StatelessWidget {
     super.key,
     required this.indiceAtual,
     required this.aoTocar,
+    this.temNotificacoesNaoLidas = false,
   });
 
   final int indiceAtual;
   final ValueChanged<int> aoTocar;
+  final bool temNotificacoesNaoLidas;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class BarraNavegacao extends StatelessWidget {
               ItemNavegacao(
                 icone: Icons.notifications_outlined,
                 selecionado: indiceAtual == 3,
-                mostrarBadge: true,
+                mostrarBadge: temNotificacoesNaoLidas,
                 aoTocar: () => aoTocar(3),
               ),
               ItemNavegacao(
