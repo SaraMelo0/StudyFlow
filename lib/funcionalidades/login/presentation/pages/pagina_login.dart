@@ -10,6 +10,7 @@ import 'package:study_flow/funcionalidades/login/presentation/widgets/cartao_cre
 import 'package:study_flow/funcionalidades/login/presentation/widgets/layout_scroll_autenticacao.dart';
 import 'package:study_flow/funcionalidades/login/presentation/widgets/rodape_cadastro.dart';
 import 'package:study_flow/funcionalidades/login/presentation/widgets/secao_login_social.dart';
+import 'package:study_flow/funcionalidades/login/presentation/pages/pagina_recuperar_senha.dart';
 
 class PaginaLogin extends StatefulWidget {
   const PaginaLogin({super.key});
@@ -21,6 +22,14 @@ class PaginaLogin extends StatefulWidget {
 class _PaginaLoginEstado extends State<PaginaLogin> {
   final _controladorEmail = TextEditingController();
   final _controladorSenha = TextEditingController();
+
+  void _aoEsqueceuSenha() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => const PaginaRecuperarSenha(),
+      ),
+    );
+  }
 
   @override
   void dispose() {
@@ -76,7 +85,7 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
               controladorEmail: _controladorEmail,
               controladorSenha: _controladorSenha,
               temaTexto: temaTexto,
-              aoEsqueceuSenha: _mostrarEmBreve,
+              aoEsqueceuSenha: _aoEsqueceuSenha,
             ),
             const SizedBox(height: 20),
             BotaoPrincipal(
