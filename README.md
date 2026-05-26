@@ -9,7 +9,7 @@
 | Victor Ferreira | Tela de Sessões de Estudo |
 | Julia Cabral da Silva | Desenvolvimento do Timer e Controle de Sessões |
 | Arthur de Sousa Bastos | Navegação entre Telas e Gerenciamento de Rotas |
-| João Pedro Rocha Silva Valadares | Implementação do Progresso Semanal e Sequência de Estudos |
+| João Pedro Rocha Silva Valadares | Histórico de Sessões |
 | Helena Passos Farias | Documentação, suporte de código e Organização do Projeto |
 
 ---

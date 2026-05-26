@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 
-import 'package:study_flow/core/strings/textos_aplicacao.dart';
 import 'package:study_flow/core/theme/cores_aplicacao.dart';
-import 'package:study_flow/core/utils/formatador_data.dart';
 
-class CabecalhoDashboard extends StatelessWidget {
-  const CabecalhoDashboard({super.key, required this.temaTexto});
+class CabecalhoNotificacoes extends StatelessWidget {
+  const CabecalhoNotificacoes({
+    super.key,
+    required this.temaTexto,
+    required this.quantidadeNaoLidas,
+  });
+
   final TextTheme temaTexto;
+  final int quantidadeNaoLidas;
+
+  String get _subtitulo {
+    if (quantidadeNaoLidas == 0) return 'Nenhuma não lida';
+    if (quantidadeNaoLidas == 1) return '1 não lida';
+    return '$quantidadeNaoLidas não lidas';
+  }
 
   @override
   Widget build(BuildContext context) {
-    final dataAtual = formatarDataPorExtenso(DateTime.now());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          TextosAplicacao.dashboardSaudacao.texto,
+          'Notificações',
           style: temaTexto.headlineSmall?.copyWith(
             color: CoresAplicacao.preto,
             fontWeight: FontWeight.w800,
@@ -23,13 +32,11 @@ class CabecalhoDashboard extends StatelessWidget {
             height: 1.2,
           ),
         ),
-
         const SizedBox(height: 4),
-
         Text(
-          dataAtual,
+          _subtitulo,
           style: temaTexto.bodyMedium?.copyWith(
-            color: CoresAplicacao.cinzaMedio,
+            color: CoresAplicacao.cinzaRotulo,
             fontWeight: FontWeight.w500,
             fontSize: 14,
           ),
