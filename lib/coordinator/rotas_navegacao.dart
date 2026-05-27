@@ -2,7 +2,8 @@ enum RotasNavegacao {
   boasVindas('/'),
   login('/login'),
   cadastro('/cadastro'),
-  dashboard('/dashboard');
+  dashboard('/dashboard'),
+  configuracoes('/configuracoes');
 
   const RotasNavegacao(this.rota);
 
