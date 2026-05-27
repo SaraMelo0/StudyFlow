@@ -14,10 +14,12 @@ class ConteudoPerfil extends StatefulWidget {
     super.key,
     required this.aoMostrarEmBreve,
     required this.aoSairConta,
+    required this.aoConfiguracoes,
   });
 
   final VoidCallback aoMostrarEmBreve;
   final VoidCallback aoSairConta;
+  final VoidCallback aoConfiguracoes;
 
   @override
   State<ConteudoPerfil> createState() => ConteudoPerfilEstado();
@@ -152,7 +154,7 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
             const SizedBox(height: 16),
             CartaoPerfilUsuario(
               temaTexto: temaTexto,
-              aoConfiguracoes: widget.aoMostrarEmBreve,
+              aoConfiguracoes: widget.aoConfiguracoes,
               aoSair: widget.aoSairConta,
             ),
             const SizedBox(height: 16),
