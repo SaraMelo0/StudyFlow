@@ -104,6 +104,7 @@ class _PaginaPrincipalEstado extends State<PaginaPrincipal> {
             key: _chavePerfil,
             aoMostrarEmBreve: _mostrarEmBreve,
             aoSairConta: _aoSairConta,
+            aoConfiguracoes: () => context.coordenador.mostrarConfiguracoes(context),
           ),
         ],
       ),
