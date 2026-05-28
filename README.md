@@ -38,7 +38,6 @@ O **StudyFlow** é um aplicativo mobile desenvolvido com o objetivo de auxiliar 
 - Dart
 - GitHub
 - Figma (Protótipo)
-<<<<<<< HEAD
 
 ---
 
@@ -47,6 +46,3 @@ O **StudyFlow** é um aplicativo mobile desenvolvido com o objetivo de auxiliar 
 - Cada integrante deve realizar pelo menos um commit no dia **12/05**
 - O repositório será utilizado por todo o grupo
 - Todas as alterações devem ser registradas no GitHub
-
-=======
->>>>>>> origin/main
