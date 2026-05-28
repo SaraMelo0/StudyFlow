@@ -11,7 +11,7 @@ import 'package:study_flow/funcionalidades/notificacoes/data/notificacoes_inicia
 import 'package:study_flow/funcionalidades/notificacoes/domain/models/notificacao.dart';
 import 'package:study_flow/funcionalidades/notificacoes/presentation/pages/notifications_page.dart';
 import 'package:study_flow/funcionalidades/perfil/presentation/pages/conteudo_perfil.dart';
-
+import 'package:study_flow/funcionalidades/timer/pages/pomodoro_page.dart';
 class PaginaPrincipal extends StatefulWidget {
   const PaginaPrincipal({super.key});
 
@@ -93,7 +93,7 @@ class _PaginaPrincipalEstado extends State<PaginaPrincipal> {
             aoVerMeta: _irParaMetasNoPerfil,
           ),
           const ConteudoMaterias(),
-          const _AbaEmBreve(),
+          const PomodoroScreen(),
           NotificationsPage(
             embutida: true,
             notificacoes: _notificacoes,
