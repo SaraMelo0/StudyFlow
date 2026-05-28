@@ -3,14 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:study_flow/core/strings/textos_aplicacao.dart';
 
 import 'package:study_flow/core/theme/cores_aplicacao.dart';
-
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_dashboard.dart';
 
 class CardProgressoSemanal extends StatelessWidget {
   const CardProgressoSemanal({super.key, required this.temaTexto});
-
   final TextTheme temaTexto;
-
   static const _rotulosDias = ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'];
 
   @override
@@ -18,7 +15,6 @@ class CardProgressoSemanal extends StatelessWidget {
     return CardDashboard(
       filho: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-
         children: [
           Row(
             children: [
@@ -49,7 +45,7 @@ class CardProgressoSemanal extends StatelessWidget {
                 child: Text(
                   TextosAplicacao.dashboardProgressoHoras.texto,
                   style: temaTexto.bodyMedium?.copyWith(
-                    color: CoresAplicacao.cinzaRotulo,
+                    color: CoresAplicacao.cinzaMedio,
                     fontWeight: FontWeight.w600,
                     fontSize: 13,
                   ),
@@ -59,7 +55,7 @@ class CardProgressoSemanal extends StatelessWidget {
               Text(
                 TextosAplicacao.dashboardProgressoPercentual.texto,
                 style: temaTexto.titleMedium?.copyWith(
-                  color: CoresAplicacao.cinzaRotulo,
+                  color: CoresAplicacao.cinzaMedio,
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
                 ),
@@ -90,7 +86,7 @@ class CardProgressoSemanal extends StatelessWidget {
                     rotulo,
 
                     style: temaTexto.labelSmall?.copyWith(
-                      color: CoresAplicacao.cinzaRotulo,
+                      color: CoresAplicacao.cinzaMedio,
                       fontWeight: FontWeight.w600,
                       fontSize: 11,
                     ),

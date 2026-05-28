@@ -28,7 +28,7 @@ class CardProximaMeta extends StatelessWidget {
               Text(
                 TextosAplicacao.dashboardProximaMeta.texto,
                 style: temaTexto.bodyMedium?.copyWith(
-                  color: CoresAplicacao.cinza7A,
+                  color: CoresAplicacao.cinzaMedio,
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                   height: 1.2,
