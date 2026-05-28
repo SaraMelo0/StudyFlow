@@ -60,17 +60,19 @@ class _PaginaPrincipalEstado extends State<PaginaPrincipal> {
   }
 
   void _aoTocarBarra(int indice) {
-    if (indice == _indiceNavegacao) return;
-    if (indice == 0 ||
-        indice == 1 ||
-        indice == _indiceNotificacoes ||
-        indice == _indicePerfil) {
-      setState(() => _indiceNavegacao = indice);
-      return;
-    }
+  if (indice == _indiceNavegacao) return;
 
-    _mostrarEmBreve();
+  if (indice == 0 ||
+      indice == 1 ||
+      indice == 2 ||
+      indice == _indiceNotificacoes ||
+      indice == _indicePerfil) {
+    setState(() => _indiceNavegacao = indice);
+    return;
   }
+
+  _mostrarEmBreve();
+}
 
   void _irParaMetasNoPerfil() {
     setState(() => _indiceNavegacao = _indicePerfil);
