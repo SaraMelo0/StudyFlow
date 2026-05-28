@@ -3,6 +3,7 @@
 ## 👥 Integrantes do Grupo
 
 | Nome do Aluno | Responsabilidades |
+|---|---|
 | Sara Santos de Melo | Tela Inicial / Dashboard / Perfil |
 | Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias |
 | Victor Ferreira | Sem função |
