@@ -7,11 +7,13 @@ class SecaoLoginSocial extends StatelessWidget {
   const SecaoLoginSocial({
     super.key,
     required this.temaTexto,
+    this.aoGoogle,
     required this.aoAutenticacaoSocial,
   });
 
   final TextTheme temaTexto;
-  final VoidCallback aoAutenticacaoSocial;
+  final VoidCallback? aoGoogle;
+  final VoidCallback? aoAutenticacaoSocial;
 
   static const double _tamanhoBotao = 52;
 
@@ -45,7 +47,7 @@ class SecaoLoginSocial extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _BotaoSocial(
-              aoPressionar: aoAutenticacaoSocial,
+              aoPressionar: aoGoogle,
               filho: const Text(
                 'G',
                 style: TextStyle(
@@ -83,7 +85,7 @@ class _BotaoSocial extends StatelessWidget {
   const _BotaoSocial({required this.filho, required this.aoPressionar});
 
   final Widget filho;
-  final VoidCallback aoPressionar;
+  final VoidCallback? aoPressionar;
 
   @override
   Widget build(BuildContext context) {
