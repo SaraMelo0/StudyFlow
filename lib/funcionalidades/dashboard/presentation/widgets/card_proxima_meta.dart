@@ -9,10 +9,14 @@ class CardProximaMeta extends StatelessWidget {
     super.key,
     required this.temaTexto,
     required this.aoVer,
+    required this.titulo,
+    required this.prazo,
   });
 
   final TextTheme temaTexto;
   final VoidCallback aoVer;
+  final String titulo;
+  final String prazo;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +73,7 @@ class CardProximaMeta extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      TextosAplicacao.dashboardMetaTitulo.texto,
+                      titulo,
                       style: temaTexto.titleLarge?.copyWith(
                         color: CoresAplicacao.preto,
                         fontWeight: FontWeight.w800,
@@ -81,7 +85,7 @@ class CardProximaMeta extends StatelessWidget {
                     const SizedBox(height: 6),
 
                     Text(
-                      TextosAplicacao.dashboardMetaPrazo.texto,
+                      prazo,
                       style: temaTexto.titleMedium?.copyWith(
                         color: CoresAplicacao.laranjaSuave,
                         fontWeight: FontWeight.w600,

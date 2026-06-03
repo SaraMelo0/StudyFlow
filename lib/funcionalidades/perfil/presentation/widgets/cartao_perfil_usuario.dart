@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:study_flow/core/strings/textos_aplicacao.dart';
 import 'package:study_flow/core/theme/cores_aplicacao.dart';
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_dashboard.dart';
+import 'package:study_flow/coordinator/injetor_aplicacao.dart';
+import 'package:study_flow/core/utils/dados_usuario_auth.dart';
 
 class CartaoPerfilUsuario extends StatelessWidget {
   const CartaoPerfilUsuario({
@@ -21,6 +23,14 @@ class CartaoPerfilUsuario extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final usuario = injecaoAplicacao.servicoAutenticacao.usuarioAtual;
+    final nome = nomeExibicaoDoUsuario(
+      usuario?.displayName,
+      usuario?.email,
+    );
+    final email = emailExibicaoDoUsuario(usuario?.email);
+    final inicial = inicialDoUsuario(nome);
+
     return CardDashboard(
       preenchimento: const EdgeInsets.fromLTRB(20, 20, 20, 20),
       filho: Column(
@@ -32,7 +42,7 @@ class CartaoPerfilUsuario extends StatelessWidget {
                 radius: 28,
                 backgroundColor: CoresAplicacao.cartaoPessego,
                 child: Text(
-                  'J',
+                  inicial,
                   style: temaTexto.titleLarge?.copyWith(
                     color: CoresAplicacao.laranja,
                     fontWeight: FontWeight.w800,
@@ -45,7 +55,7 @@ class CartaoPerfilUsuario extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      TextosAplicacao.perfilNome.texto,
+                      nome,
                       style: temaTexto.titleMedium?.copyWith(
                         color: CoresAplicacao.preto,
                         fontWeight: FontWeight.w800,
@@ -54,7 +64,7 @@ class CartaoPerfilUsuario extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      TextosAplicacao.perfilEmail.texto,
+                      email,
                       style: temaTexto.bodySmall?.copyWith(
                         color: CoresAplicacao.cinzaMedio,
                         fontSize: 13,
