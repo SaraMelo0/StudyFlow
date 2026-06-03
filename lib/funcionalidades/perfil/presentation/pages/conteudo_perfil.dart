@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:study_flow/coordinator/injetor_aplicacao.dart';
+import 'package:study_flow/core/firebase/mensagem_erro_firestore.dart';
 import 'package:study_flow/core/strings/textos_aplicacao.dart';
 import 'package:study_flow/funcionalidades/perfil/model/meta_estudo.dart';
 import 'package:study_flow/funcionalidades/perfil/presentation/widgets/cabecalho_perfil.dart';
@@ -28,9 +30,7 @@ class ConteudoPerfil extends StatefulWidget {
 class ConteudoPerfilEstado extends State<ConteudoPerfil> {
   final _controladorScroll = ScrollController();
   final _chaveSecaoMetas = GlobalKey();
-
-  late List<MetaEstudo> _metasAtivas;
-  late List<MetaEstudo> _metasConcluidas;
+  final _repositorioMetas = injecaoAplicacao.repositorioMetas;
 
   void irParaMetas() {
     final contextoMetas = _chaveSecaoMetas.currentContext;
@@ -49,40 +49,6 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
     super.dispose();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    final prazo = DateTime.now().add(const Duration(days: 15));
-    _metasAtivas = [
-      MetaEstudo(
-        id: 'meta-ativa-1',
-        titulo: TextosAplicacao.perfilMetaAtivaTitulo.texto,
-        descricao: TextosAplicacao.perfilMetaAtivaDescricao.texto,
-        prazo: prazo,
-        etapas: [
-          const EtapaMeta(
-            id: 'e1',
-            texto: 'Conceitos básicos de UX e UI',
-            concluida: true,
-          ),
-          const EtapaMeta(id: 'e2', texto: 'Princípios de UX', concluida: true),
-          const EtapaMeta(id: 'e3', texto: 'Design de Interface (UI)'),
-          const EtapaMeta(id: 'e4', texto: 'Wireframes, protótipos e mockups'),
-        ],
-      ),
-    ];
-    _metasConcluidas = [
-      MetaEstudo(
-        id: 'meta-concluida-1',
-        titulo: TextosAplicacao.perfilMetaConcluidaTitulo.texto,
-        descricao: '',
-        prazo: DateTime.now().subtract(const Duration(days: 1)),
-        etapas: const [],
-        concluida: true,
-      ),
-    ];
-  }
-
   void _mostrarSnackBar(String mensagem) {
     if (!mounted) return;
     ScaffoldMessenger.of(
@@ -90,52 +56,65 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
     ).showSnackBar(SnackBar(content: Text(mensagem)));
   }
 
+  void _mostrarErro(Object erro) {
+    if (!mounted) return;
+    _mostrarSnackBar(mensagemErroFirestore(erro));
+  }
+
   Future<void> _aoNovaMeta() async {
     final nova = await mostrarDialogoNovaMeta(context);
     if (nova == null || !mounted) return;
-    setState(() => _metasAtivas.add(nova));
-    _mostrarSnackBar(TextosAplicacao.perfilMetaCriada.texto);
+
+    try {
+      await _repositorioMetas.criar(nova);
+      _mostrarSnackBar(TextosAplicacao.perfilMetaCriada.texto);
+    } catch (e) {
+      _mostrarErro(e);
+    }
   }
 
   Future<void> _aoEditar(MetaEstudo meta) async {
     final atualizada = await mostrarDialogoEditarMeta(context, meta);
     if (atualizada == null || !mounted) return;
-    setState(() {
-      final indiceAtiva = _metasAtivas.indexWhere((m) => m.id == meta.id);
-      if (indiceAtiva >= 0) {
-        _metasAtivas[indiceAtiva] = atualizada;
-        return;
-      }
-      final indiceConcluida = _metasConcluidas.indexWhere(
-        (m) => m.id == meta.id,
-      );
-      if (indiceConcluida >= 0) {
-        _metasConcluidas[indiceConcluida] = atualizada;
-      }
-    });
-    _mostrarSnackBar(TextosAplicacao.perfilMetaSalva.texto);
+
+    try {
+      await _repositorioMetas.atualizar(atualizada);
+      _mostrarSnackBar(TextosAplicacao.perfilMetaSalva.texto);
+    } catch (e) {
+      _mostrarErro(e);
+    }
   }
 
-  void _aoMetaAtivaAlterada(MetaEstudo meta) {
-    setState(() {
-      final indice = _metasAtivas.indexWhere((m) => m.id == meta.id);
-      if (indice >= 0) _metasAtivas[indice] = meta;
-    });
+  Future<void> _aoMetaAtivaAlterada(MetaEstudo meta) async {
+    try {
+      await _repositorioMetas.atualizar(meta);
+    } catch (e) {
+      _mostrarErro(e);
+    }
   }
 
-  void _aoMarcarConcluida(MetaEstudo meta) {
-    setState(() {
-      _metasAtivas.removeWhere((m) => m.id == meta.id);
-      _metasConcluidas.add(meta.copyWith(concluida: true));
-    });
+  Future<void> _aoMarcarConcluida(MetaEstudo meta) async {
+    try {
+      await _repositorioMetas.atualizar(meta.copyWith(concluida: true));
+    } catch (e) {
+      _mostrarErro(e);
+    }
   }
 
-  void _aoExcluir(MetaEstudo meta) {
-    setState(() => _metasAtivas.removeWhere((m) => m.id == meta.id));
+  Future<void> _aoExcluir(MetaEstudo meta) async {
+    try {
+      await _repositorioMetas.excluir(meta.id);
+    } catch (e) {
+      _mostrarErro(e);
+    }
   }
 
-  void _aoRemover(MetaEstudo meta) {
-    setState(() => _metasConcluidas.removeWhere((m) => m.id == meta.id));
+  Future<void> _aoRemover(MetaEstudo meta) async {
+    try {
+      await _repositorioMetas.excluir(meta.id);
+    } catch (e) {
+      _mostrarErro(e);
+    }
   }
 
   @override
@@ -144,36 +123,68 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
 
     return SafeArea(
       bottom: false,
-      child: SingleChildScrollView(
-        controller: _controladorScroll,
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CabecalhoPerfil(temaTexto: temaTexto),
-            const SizedBox(height: 16),
-            CartaoPerfilUsuario(
-              temaTexto: temaTexto,
-              aoConfiguracoes: widget.aoConfiguracoes,
-              aoSair: widget.aoSairConta,
+      child: StreamBuilder<List<MetaEstudo>>(
+        stream: _repositorioMetas.observarMetas(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(
+                  TextosAplicacao.perfilErroCarregarMetas.texto,
+                  textAlign: TextAlign.center,
+                  style: temaTexto.bodyMedium,
+                ),
+              ),
+            );
+          }
+
+          final carregando =
+              snapshot.connectionState == ConnectionState.waiting &&
+              !snapshot.hasData;
+
+          final todas = snapshot.data ?? const <MetaEstudo>[];
+          final metasAtivas = todas.where((m) => !m.concluida).toList();
+          final metasConcluidas = todas.where((m) => m.concluida).toList();
+
+          return SingleChildScrollView(
+            controller: _controladorScroll,
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CabecalhoPerfil(temaTexto: temaTexto),
+                const SizedBox(height: 16),
+                CartaoPerfilUsuario(
+                  temaTexto: temaTexto,
+                  aoConfiguracoes: widget.aoConfiguracoes,
+                  aoSair: widget.aoSairConta,
+                ),
+                const SizedBox(height: 16),
+                SecaoConquistas(temaTexto: temaTexto),
+                const SizedBox(height: 20),
+                if (carregando)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                else
+                  SecaoMinhasMetas(
+                    key: _chaveSecaoMetas,
+                    temaTexto: temaTexto,
+                    metasAtivas: metasAtivas,
+                    metasConcluidas: metasConcluidas,
+                    aoNovaMeta: _aoNovaMeta,
+                    aoEditar: _aoEditar,
+                    aoMetaAtivaAlterada: _aoMetaAtivaAlterada,
+                    aoMarcarConcluida: _aoMarcarConcluida,
+                    aoExcluir: _aoExcluir,
+                    aoRemover: _aoRemover,
+                  ),
+              ],
             ),
-            const SizedBox(height: 16),
-            SecaoConquistas(temaTexto: temaTexto),
-            const SizedBox(height: 20),
-            SecaoMinhasMetas(
-              key: _chaveSecaoMetas,
-              temaTexto: temaTexto,
-              metasAtivas: _metasAtivas,
-              metasConcluidas: _metasConcluidas,
-              aoNovaMeta: _aoNovaMeta,
-              aoEditar: _aoEditar,
-              aoMetaAtivaAlterada: _aoMetaAtivaAlterada,
-              aoMarcarConcluida: _aoMarcarConcluida,
-              aoExcluir: _aoExcluir,
-              aoRemover: _aoRemover,
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

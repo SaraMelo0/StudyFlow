@@ -3,8 +3,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 const dominioInstitucional = '@souunit.com.br';
 
-/// Web Client ID (OAuth) do Firebase — necessário para idToken no Android.
-/// Firebase Console → Configurações → Seus apps → cliente Web.
 const idClienteWebGoogle =
     '154826302240-9dsjjt370cnbvk2oie3uhtc40l222mjh.apps.googleusercontent.com';
 
@@ -20,11 +18,9 @@ class LoginCanceladoException implements Exception {}
 class ServicoAutenticacao {
   ServicoAutenticacao({FirebaseAuth? auth, GoogleSignIn? googleSignIn})
     : _auth = auth ?? FirebaseAuth.instance,
-      _googleSignIn = googleSignIn ??
-          GoogleSignIn(
-            serverClientId: idClienteWebGoogle,
-            scopes: ['email'],
-          );
+      _googleSignIn =
+          googleSignIn ??
+          GoogleSignIn(serverClientId: idClienteWebGoogle, scopes: ['email']);
 
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn;
