@@ -1,5 +1,6 @@
 import 'package:study_flow/coordinator/coordenador_navegacao.dart';
 import 'package:study_flow/funcionalidades/autenticacao/data/servico_autenticacao.dart';
+import 'package:study_flow/funcionalidades/notificacoes/data/repositorio_notificacoes_firestore.dart';
 import 'package:study_flow/funcionalidades/perfil/data/repositorio_metas_firestore.dart';
 import 'package:study_flow/funcionalidades/sessoes/data/repositorio_sessoes_firestore.dart';
 
@@ -12,4 +13,6 @@ final class InjecaoAplicacao {
       RepositorioMetasFirestore();
   final RepositorioSessoesFirestore repositorioSessoes =
       RepositorioSessoesFirestore();
+  final RepositorioNotificacoesFirestore repositorioNotificacoes =
+      RepositorioNotificacoesFirestore();
 }

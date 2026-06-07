@@ -11,7 +11,6 @@ import 'package:study_flow/core/widgets/botao_principal.dart';
 import 'package:study_flow/core/widgets/cabecalho_logo.dart';
 import 'package:study_flow/funcionalidades/autenticacao/data/mensagens_erro_autenticacao.dart';
 import 'package:study_flow/funcionalidades/autenticacao/data/servico_autenticacao.dart';
-import 'package:study_flow/funcionalidades/login/presentation/pages/pagina_recuperar_senha.dart';
 import 'package:study_flow/funcionalidades/login/presentation/widgets/cartao_credenciais.dart';
 import 'package:study_flow/funcionalidades/login/presentation/widgets/layout_scroll_autenticacao.dart';
 import 'package:study_flow/funcionalidades/login/presentation/widgets/rodape_cadastro.dart';
@@ -37,11 +36,7 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
   }
 
   void _aoEsqueceuSenha() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const PaginaRecuperarSenha(),
-      ),
-    );
+    context.coordenador.mostrarRecuperarSenha(context);
   }
 
   @override
