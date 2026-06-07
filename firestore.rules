@@ -46,5 +46,20 @@ service cloud.firestore {
       allow delete: if request.auth != null
         && resource.data.criado_por == request.auth.token.email;
     }
+
+    match /notificacoes/{notificacaoId} {
+      allow read: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+
+      allow create: if request.auth != null
+        && request.resource.data.criado_por == request.auth.token.email;
+
+      allow update: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email
+        && request.resource.data.criado_por == resource.data.criado_por;
+
+      allow delete: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+    }
   }
 }

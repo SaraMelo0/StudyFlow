@@ -6,55 +6,54 @@ const Color _fundoIconeLaranja = Color(0xFFFFE4D6);
 const Color _fundoIconeRoxo = Color(0xFFF3E8FF);
 const Color _fundoIconeBege = Color(0xFFF5EDE4);
 
-/// Retorna cópia mutável (necessário no Flutter Web para marcar/excluir).
-List<Notificacao> criarNotificacoesIniciais() {
-  return List<Notificacao>.of(const [
+/// Notificações usadas como semente inicial no Firestore quando o usuário
+/// não possui nenhuma notificação cadastrada.
+List<Notificacao> criarNotificacoesParaSemente() {
+  final agora = DateTime.now();
+  return [
     Notificacao(
-      id: '1',
+      id: '',
       emojiIcone: '🔥',
       corFundoIcone: _fundoIconeLaranja,
       emojiTitulo: '🥳',
       titulo: 'Parabéns',
       descricao: 'Você completou 3 dias seguidos de estudo. Continue assim!',
-      tempoRelativo: '37m atrás',
+      criadoEm: agora.subtract(const Duration(minutes: 37)),
     ),
     Notificacao(
-      id: '2',
+      id: '',
       emojiIcone: '⏰',
       corFundoIcone: _fundoIconeLaranja,
       emojiTitulo: '📚',
       titulo: 'Hora de estudar!',
-      descricao:
-          'Que tal uma sessão de estudos agora? Você está indo muito bem!',
-      tempoRelativo: '2h atrás',
+      descricao: 'Que tal uma sessão de estudos agora? Você está indo muito bem!',
+      criadoEm: agora.subtract(const Duration(hours: 2)),
     ),
     Notificacao(
-      id: '3',
+      id: '',
       emojiIcone: '💡',
       corFundoIcone: _fundoIconeRoxo,
       emojiTitulo: '💪',
       titulo: 'Continue firme!',
       descricao: 'Você já estudou 12h essa semana. Está no caminho certo!',
-      tempoRelativo: 'ontem',
+      criadoEm: agora.subtract(const Duration(days: 1, hours: 3)),
       lida: true,
     ),
     Notificacao(
-      id: '4',
+      id: '',
       emojiIcone: '🎓',
       corFundoIcone: _fundoIconeBege,
       emojiTitulo: '🏆',
       titulo: 'Nova conquista!',
       descricao: 'Você completou sua primeira meta! Parabéns pelo esforço.',
-      tempoRelativo: '2h atrás',
+      criadoEm: agora.subtract(const Duration(hours: 2, minutes: 10)),
       lida: true,
     ),
-  ]);
+  ];
 }
 
-int contarNotificacoesNaoLidas(List<Notificacao> notificacoes) {
-  return notificacoes.where((notificacao) => !notificacao.lida).length;
-}
+int contarNotificacoesNaoLidas(List<Notificacao> notificacoes) =>
+    notificacoes.where((n) => !n.lida).length;
 
-bool temNotificacoesNaoLidas(List<Notificacao> notificacoes) {
-  return contarNotificacoesNaoLidas(notificacoes) > 0;
-}
+bool temNotificacoesNaoLidas(List<Notificacao> notificacoes) =>
+    contarNotificacoesNaoLidas(notificacoes) > 0;

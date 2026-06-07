@@ -9,3 +9,5 @@ const String colecaoMaterias = 'materias';
 const String colecaoMetas = 'metas';
 
 const String colecaoSessoesEstudo = 'sessoes_estudo';
+
+const String colecaoNotificacoes = 'notificacoes';
