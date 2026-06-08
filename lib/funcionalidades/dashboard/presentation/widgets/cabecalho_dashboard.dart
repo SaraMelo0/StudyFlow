@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'package:study_flow/core/strings/textos_aplicacao.dart';
 import 'package:study_flow/core/theme/cores_aplicacao.dart';
 import 'package:study_flow/core/utils/formatador_data.dart';
 
 class CabecalhoDashboard extends StatelessWidget {
-  const CabecalhoDashboard({super.key, required this.temaTexto});
+  const CabecalhoDashboard({
+    super.key,
+    required this.temaTexto,
+    required this.nomeUsuario,
+  });
+
   final TextTheme temaTexto;
+  final String nomeUsuario;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,7 @@ class CabecalhoDashboard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          TextosAplicacao.dashboardSaudacao.texto,
+          'Olá, $nomeUsuario 📚',
           style: temaTexto.headlineSmall?.copyWith(
             color: CoresAplicacao.preto,
             fontWeight: FontWeight.w800,
