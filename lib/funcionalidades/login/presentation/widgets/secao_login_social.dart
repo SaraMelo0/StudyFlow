@@ -7,11 +7,15 @@ class SecaoLoginSocial extends StatelessWidget {
   const SecaoLoginSocial({
     super.key,
     required this.temaTexto,
+    this.aoGoogle,
+    this.exibirGoogle = true,
     required this.aoAutenticacaoSocial,
   });
 
   final TextTheme temaTexto;
-  final VoidCallback aoAutenticacaoSocial;
+  final VoidCallback? aoGoogle;
+  final bool exibirGoogle;
+  final VoidCallback? aoAutenticacaoSocial;
 
   static const double _tamanhoBotao = 52;
 
@@ -44,18 +48,20 @@ class SecaoLoginSocial extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _BotaoSocial(
-              aoPressionar: aoAutenticacaoSocial,
-              filho: const Text(
-                'G',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w800,
+            if (exibirGoogle) ...[
+              _BotaoSocial(
+                aoPressionar: aoGoogle,
+                filho: const Text(
+                  'G',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(width: 20),
+              const SizedBox(width: 20),
+            ],
             _BotaoSocial(
               aoPressionar: aoAutenticacaoSocial,
               filho: Icon(Icons.apple, color: Colors.white, size: 28),
@@ -83,7 +89,7 @@ class _BotaoSocial extends StatelessWidget {
   const _BotaoSocial({required this.filho, required this.aoPressionar});
 
   final Widget filho;
-  final VoidCallback aoPressionar;
+  final VoidCallback? aoPressionar;
 
   @override
   Widget build(BuildContext context) {

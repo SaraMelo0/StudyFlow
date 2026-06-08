@@ -6,9 +6,16 @@ import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_h
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_dashboard.dart';
 
 class SecaoHoje extends StatelessWidget {
-  const SecaoHoje({super.key, required this.temaTexto});
+  const SecaoHoje({
+    super.key,
+    required this.temaTexto,
+    required this.tempoEstudado,
+    required this.sessoesConcluidas,
+  });
 
   final TextTheme temaTexto;
+  final String tempoEstudado;
+  final String sessoesConcluidas;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class SecaoHoje extends StatelessWidget {
             children: [
               Expanded(
                 child: CardHoje(
-                  valor: TextosAplicacao.dashboardTempoEstudado.texto,
+                  valor: tempoEstudado,
                   rotulo: TextosAplicacao.dashboardTempoEstudadoRotulo.texto,
                   temaTexto: temaTexto,
                 ),
@@ -43,7 +50,7 @@ class SecaoHoje extends StatelessWidget {
 
               Expanded(
                 child: CardHoje(
-                  valor: TextosAplicacao.dashboardSessoesConcluidas.texto,
+                  valor: sessoesConcluidas,
                   rotulo:
                       TextosAplicacao.dashboardSessoesConcluidasRotulo.texto,
                   temaTexto: temaTexto,

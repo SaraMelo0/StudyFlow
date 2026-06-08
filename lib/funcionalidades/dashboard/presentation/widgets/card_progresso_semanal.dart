@@ -6,8 +6,19 @@ import 'package:study_flow/core/theme/cores_aplicacao.dart';
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_dashboard.dart';
 
 class CardProgressoSemanal extends StatelessWidget {
-  const CardProgressoSemanal({super.key, required this.temaTexto});
+  const CardProgressoSemanal({
+    super.key,
+    required this.temaTexto,
+    required this.horasTexto,
+    required this.percentualTexto,
+    required this.valorProgresso,
+  });
+
   final TextTheme temaTexto;
+  final String horasTexto;
+  final String percentualTexto;
+  final double valorProgresso;
+
   static const _rotulosDias = ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'];
 
   @override
@@ -43,7 +54,7 @@ class CardProgressoSemanal extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  TextosAplicacao.dashboardProgressoHoras.texto,
+                  horasTexto,
                   style: temaTexto.bodyMedium?.copyWith(
                     color: CoresAplicacao.cinzaMedio,
                     fontWeight: FontWeight.w600,
@@ -53,7 +64,7 @@ class CardProgressoSemanal extends StatelessWidget {
               ),
 
               Text(
-                TextosAplicacao.dashboardProgressoPercentual.texto,
+                percentualTexto,
                 style: temaTexto.titleMedium?.copyWith(
                   color: CoresAplicacao.cinzaMedio,
                   fontWeight: FontWeight.w700,
@@ -68,8 +79,8 @@ class CardProgressoSemanal extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(6),
 
-            child: const LinearProgressIndicator(
-              value: 0.83,
+            child: LinearProgressIndicator(
+              value: valorProgresso.clamp(0.0, 1.0),
               minHeight: 10,
               backgroundColor: CoresAplicacao.trilhoProgresso,
               color: CoresAplicacao.laranjaSuave,
