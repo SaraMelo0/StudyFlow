@@ -31,16 +31,14 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
 
   void _mostrarErro(String mensagem) {
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(mensagem)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(mensagem)));
   }
 
   void _aoEsqueceuSenha() {
     Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const PaginaRecuperarSenha(),
-      ),
+      MaterialPageRoute<void>(builder: (_) => const PaginaRecuperarSenha()),
     );
   }
 
@@ -167,8 +165,7 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
                   temaTexto: temaTexto,
                   exibirGoogle: googleSignInDisponivel,
                   aoGoogle: _carregando ? null : _aoGoogle,
-                  aoAutenticacaoSocial:
-                      _carregando ? null : _mostrarEmBreve,
+                  aoAutenticacaoSocial: _carregando ? null : _mostrarEmBreve,
                 ),
                 SizedBox(height: 32 + margemInferior),
                 RodapeCadastro(
