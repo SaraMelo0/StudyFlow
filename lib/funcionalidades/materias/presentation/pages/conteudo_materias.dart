@@ -22,6 +22,8 @@ class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
 
   final _repositorioMaterias = injecaoAplicacao.repositorioMaterias;
 
+  final _servicoNotificacoes = injecaoAplicacao.servicoNotificacoes;
+
   void _mostrarErro(Object erro) {
     if (!mounted) return;
     ScaffoldMessenger.of(
@@ -45,6 +47,10 @@ class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
           progressoPercentual: resultado.progressoPercentual,
         ),
       );
+
+      try {
+        await _servicoNotificacoes.notificarMateriaCriada(resultado.nome);
+      } catch (_) {}
     } catch (e) {
       _mostrarErro(e);
     }
@@ -59,12 +65,18 @@ class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
     if (resultado == null || !mounted) return;
 
     try {
-      await _repositorioMaterias.atualizar(
-        materia.copyWith(
-          nome: resultado.nome,
-          progressoPercentual: resultado.progressoPercentual,
-        ),
+      final materiaAtualizada = materia.copyWith(
+        nome: resultado.nome,
+        progressoPercentual: resultado.progressoPercentual,
       );
+
+      await _repositorioMaterias.atualizar(materiaAtualizada);
+
+      try {
+        await _servicoNotificacoes.notificarMateriaAtualizada(
+          materiaAtualizada.nome,
+        );
+      } catch (_) {}
     } catch (e) {
       _mostrarErro(e);
     }
@@ -73,6 +85,10 @@ class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
   Future<void> _excluirMateria(Materia materia) async {
     try {
       await _repositorioMaterias.excluir(materia.id);
+
+      try {
+        await _servicoNotificacoes.notificarMateriaRemovida(materia.nome);
+      } catch (_) {}
     } catch (e) {
       _mostrarErro(e);
     }
