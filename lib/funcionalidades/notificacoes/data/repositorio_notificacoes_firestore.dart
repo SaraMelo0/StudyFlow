@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:study_flow/core/firebase/campos_firestore.dart';
 import 'package:study_flow/core/firebase/email_usuario_logado.dart';
-import 'package:study_flow/funcionalidades/notificacoes/data/notificacoes_iniciais.dart';
 import 'package:study_flow/funcionalidades/notificacoes/domain/models/notificacao.dart';
 
 class RepositorioNotificacoesFirestore {
@@ -31,6 +30,15 @@ class RepositorioNotificacoesFirestore {
         .map((snapshot) => snapshot.docs.isNotEmpty);
   }
 
+  Future<void> criar(Notificacao notificacao) async {
+    final email = exigirEmailUsuarioLogado();
+    await _colecao.add({
+      ...notificacao.toFirestore(),
+      campoCriadoPor: email,
+      campoCriadoEm: FieldValue.serverTimestamp(),
+    });
+  }
+
   Future<void> marcarComoLida(String id) async {
     await _colecao.doc(id).update({'lida': true});
   }
@@ -39,24 +47,24 @@ class RepositorioNotificacoesFirestore {
     await _colecao.doc(id).delete();
   }
 
-  Future<void> semearSeVazio() async {
+  /// Remove documentos gravados pelo antigo sistema de seed (sem campo `tipo`
+  /// ou com `tipo` vazio), pois não representam eventos reais do usuário.
+  Future<void> limparNotificacoesMockadas() async {
     final email = exigirEmailUsuarioLogado();
     final snapshot = await _colecao
         .where(campoCriadoPor, isEqualTo: email)
-        .limit(1)
         .get();
 
-    if (snapshot.docs.isNotEmpty) return;
+    final mockados = snapshot.docs.where((doc) {
+      final tipo = doc.data()['tipo'];
+      return tipo == null || (tipo as String).trim().isEmpty;
+    }).toList();
 
-    final semente = criarNotificacoesParaSemente();
+    if (mockados.isEmpty) return;
+
     final batch = _firestore.batch();
-    for (final notificacao in semente) {
-      final ref = _colecao.doc();
-      batch.set(ref, {
-        ...notificacao.toFirestore(),
-        campoCriadoPor: email,
-        campoCriadoEm: Timestamp.fromDate(notificacao.criadoEm),
-      });
+    for (final doc in mockados) {
+      batch.delete(doc.reference);
     }
     await batch.commit();
   }

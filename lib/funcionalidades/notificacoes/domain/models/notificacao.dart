@@ -6,6 +6,7 @@ import 'package:study_flow/core/firebase/campos_firestore.dart';
 class Notificacao {
   const Notificacao({
     required this.id,
+    required this.tipo,
     required this.emojiIcone,
     required this.corFundoIcone,
     required this.emojiTitulo,
@@ -16,6 +17,7 @@ class Notificacao {
   });
 
   final String id;
+  final String tipo;
   final String emojiIcone;
   final Color corFundoIcone;
   final String emojiTitulo;
@@ -45,6 +47,7 @@ class Notificacao {
 
     return Notificacao(
       id: id,
+      tipo: dados['tipo'] as String? ?? '',
       emojiIcone: dados['emoji_icone'] as String? ?? '🔔',
       corFundoIcone: Color(dados['cor_fundo_icone'] as int? ?? 0xFFFFE4D6),
       emojiTitulo: dados['emoji_titulo'] as String? ?? '',
@@ -56,6 +59,7 @@ class Notificacao {
   }
 
   Map<String, dynamic> toFirestore() => {
+    'tipo': tipo,
     'emoji_icone': emojiIcone,
     'cor_fundo_icone': corFundoIcone.toARGB32(),
     'emoji_titulo': emojiTitulo,
@@ -67,6 +71,7 @@ class Notificacao {
   Notificacao copyWith({bool? lida}) {
     return Notificacao(
       id: id,
+      tipo: tipo,
       emojiIcone: emojiIcone,
       corFundoIcone: corFundoIcone,
       emojiTitulo: emojiTitulo,
