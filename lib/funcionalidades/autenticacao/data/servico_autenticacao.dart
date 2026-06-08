@@ -60,7 +60,11 @@ class ServicoAutenticacao {
     return _validarDominioOuDeslogar(credencial.user!);
   }
 
-  Future<User> cadastrarComEmail(String email, String senha) async {
+  Future<User> cadastrarComEmail(
+    String email,
+    String senha, {
+    String? nome,
+  }) async {
     if (!emailPermitido(email)) {
       throw DominioNaoPermitidoException();
     }
@@ -69,7 +73,14 @@ class ServicoAutenticacao {
       email: email.trim(),
       password: senha,
     );
-    return _validarDominioOuDeslogar(credencial.user!);
+
+    final usuario = credencial.user!;
+    final nomeLimpo = nome?.trim();
+    if (nomeLimpo != null && nomeLimpo.isNotEmpty) {
+      await usuario.updateDisplayName(nomeLimpo);
+    }
+
+    return _validarDominioOuDeslogar(usuario);
   }
 
   Future<User> entrarComGoogle() async {
