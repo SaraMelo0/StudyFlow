@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:study_flow/coordinator/injetor_aplicacao.dart';
+import 'package:study_flow/core/firebase/mensagem_erro_firestore.dart';
+import 'package:study_flow/core/strings/textos_aplicacao.dart';
 import 'package:study_flow/funcionalidades/materias/domain/materia.dart';
 import 'package:study_flow/funcionalidades/materias/presentation/widgets/cabecalho_materias.dart';
 import 'package:study_flow/funcionalidades/materias/presentation/widgets/card_materia.dart';
@@ -18,36 +20,14 @@ class ConteudoMaterias extends StatefulWidget {
 class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
   static const double _espacoInferiorBarra = 88;
 
-  final _servicoNotificacoes = injecaoAplicacao.servicoNotificacoes;
+  final _repositorioMaterias = injecaoAplicacao.repositorioMaterias;
 
-  final List<Materia> _materias = [
-    const Materia(
-      id: '1',
-      nome: 'Governança de TI',
-      horasEstudadas: 12.5,
-      progressoPercentual: 65,
-    ),
-    const Materia(
-      id: '2',
-      nome: 'Sistema de Gestão',
-      horasEstudadas: 10.2,
-      progressoPercentual: 55,
-    ),
-    const Materia(
-      id: '3',
-      nome: 'Machine Learning',
-      horasEstudadas: 8.3,
-      progressoPercentual: 45,
-    ),
-    const Materia(
-      id: '4',
-      nome: 'Programação Mobile',
-      horasEstudadas: 6.7,
-      progressoPercentual: 38,
-    ),
-  ];
-
-  int _proximoId = 5;
+  void _mostrarErro(Object erro) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(mensagemErroFirestore(erro))));
+  }
 
   Future<void> _abrirNovaMateria() async {
     final resultado = await mostrarDialogoFormularioMateria(
@@ -56,21 +36,17 @@ class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
     );
     if (resultado == null || !mounted) return;
 
-    final novaMateria = Materia(
-      id: '${_proximoId++}',
-      nome: resultado.nome,
-      horasEstudadas: 0,
-      progressoPercentual: resultado.progressoPercentual,
-    );
-
-    setState(() {
-      _materias.add(novaMateria);
-    });
-
     try {
-      await _servicoNotificacoes.notificarMateriaCriada(novaMateria.nome);
-    } catch (_) {
-      // Notificação é efeito colateral; falha não interrompe o fluxo principal.
+      await _repositorioMaterias.criar(
+        Materia(
+          id: '',
+          nome: resultado.nome,
+          horasEstudadas: 0,
+          progressoPercentual: resultado.progressoPercentual,
+        ),
+      );
+    } catch (e) {
+      _mostrarErro(e);
     }
   }
 
@@ -82,36 +58,23 @@ class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
     );
     if (resultado == null || !mounted) return;
 
-    final indice = _materias.indexWhere((m) => m.id == materia.id);
-    if (indice == -1) return;
-
-    final atualizada = materia.copyWith(
-      nome: resultado.nome,
-      progressoPercentual: resultado.progressoPercentual,
-    );
-
-    setState(() {
-      _materias[indice] = atualizada;
-    });
-
     try {
-      await _servicoNotificacoes.notificarMateriaAtualizada(atualizada.nome);
-    } catch (_) {
-      // Notificação é efeito colateral; falha não interrompe o fluxo principal.
+      await _repositorioMaterias.atualizar(
+        materia.copyWith(
+          nome: resultado.nome,
+          progressoPercentual: resultado.progressoPercentual,
+        ),
+      );
+    } catch (e) {
+      _mostrarErro(e);
     }
   }
 
   Future<void> _excluirMateria(Materia materia) async {
-    final nome = materia.nome;
-
-    setState(() {
-      _materias.removeWhere((m) => m.id == materia.id);
-    });
-
     try {
-      await _servicoNotificacoes.notificarMateriaRemovida(nome);
-    } catch (_) {
-      // Notificação é efeito colateral; falha não interrompe o fluxo principal.
+      await _repositorioMaterias.excluir(materia.id);
+    } catch (e) {
+      _mostrarErro(e);
     }
   }
 
@@ -120,28 +83,62 @@ class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
     final temaTexto = GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme);
 
     return SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, _espacoInferiorBarra),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CabecalhoMaterias(
-              temaTexto: temaTexto,
-              quantidadeMaterias: _materias.length,
-              aoAdicionar: _abrirNovaMateria,
-            ),
-            const SizedBox(height: 20),
-            for (var i = 0; i < _materias.length; i++) ...[
-              if (i > 0) const SizedBox(height: 14),
-              CardMateria(
-                materia: _materias[i],
-                temaTexto: temaTexto,
-                aoEditar: () => _abrirEditarMateria(_materias[i]),
-                aoExcluir: () => _excluirMateria(_materias[i]),
+      child: StreamBuilder<List<Materia>>(
+        stream: _repositorioMaterias.observarMaterias(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(
+                  TextosAplicacao.materiasErroCarregar.texto,
+                  textAlign: TextAlign.center,
+                  style: temaTexto.bodyMedium,
+                ),
               ),
-            ],
-          ],
-        ),
+            );
+          }
+
+          final carregando =
+              snapshot.connectionState == ConnectionState.waiting &&
+              !snapshot.hasData;
+          final materias = snapshot.data ?? const <Materia>[];
+
+          return SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(
+              20,
+              12,
+              20,
+              _espacoInferiorBarra,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CabecalhoMaterias(
+                  temaTexto: temaTexto,
+                  quantidadeMaterias: materias.length,
+                  aoAdicionar: _abrirNovaMateria,
+                ),
+                const SizedBox(height: 20),
+                if (carregando)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                else
+                  for (var i = 0; i < materias.length; i++) ...[
+                    if (i > 0) const SizedBox(height: 14),
+                    CardMateria(
+                      materia: materias[i],
+                      temaTexto: temaTexto,
+                      aoEditar: () => _abrirEditarMateria(materias[i]),
+                      aoExcluir: () => _excluirMateria(materias[i]),
+                    ),
+                  ],
+              ],
+            ),
+          );
+        },
       ),
     );
   }
