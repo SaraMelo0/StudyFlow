@@ -76,6 +76,9 @@ enum TextosAplicacao {
   materiasCancelar('Cancelar'),
   materiasAdicionar('Adicionar'),
   materiasSalvar('Salvar'),
+  materiasErroCarregar(
+    'Não foi possível carregar suas matérias. Tente novamente.',
+  ),
   perfilTitulo('Perfil & Metas'),
   perfilSubtitulo('Defina e acompanhe seus objetivos'),
   perfilConfiguracoes('Configurações'),
