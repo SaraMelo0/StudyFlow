@@ -3,6 +3,9 @@ import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'package:study_flow/funcionalidades/autenticacao/data/entrada_google_stub.dart'
+    if (dart.library.html) 'package:study_flow/funcionalidades/autenticacao/data/entrada_google_web.dart';
+
 const dominioInstitucional = '@souunit.com.br';
 
 const idClienteWebGoogle =
@@ -23,7 +26,7 @@ GoogleSignIn criarGoogleSignIn() {
   return GoogleSignIn(
     scopes: ['email'],
     clientId: kIsWeb ? idClienteWebGoogle : null,
-    serverClientId: kIsWeb ? null : idClienteWebGoogle,
+    serverClientId: idClienteWebGoogle,
   );
 }
 
@@ -88,6 +91,30 @@ class ServicoAutenticacao {
       throw GoogleSignInIndisponivelException();
     }
 
+    final UserCredential credencial;
+    if (kIsWeb) {
+      try {
+        credencial = await executarEntradaGoogle(_auth);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'popup-closed-by-user') {
+          throw LoginCanceladoException();
+        }
+        rethrow;
+      }
+    } else {
+      credencial = await _entrarComGoogleNativo();
+    }
+
+    final usuario = await _validarDominioOuDeslogar(credencial.user!);
+
+    if (kIsWeb) {
+      await _auth.authStateChanges().firstWhere((u) => u != null);
+    }
+
+    return usuario;
+  }
+
+  Future<UserCredential> _entrarComGoogleNativo() async {
     final contaGoogle = await _googleSignIn.signIn();
     if (contaGoogle == null) {
       throw LoginCanceladoException();
@@ -104,8 +131,7 @@ class ServicoAutenticacao {
       idToken: authGoogle.idToken,
     );
 
-    final credencial = await _auth.signInWithCredential(credencialFirebase);
-    return _validarDominioOuDeslogar(credencial.user!);
+    return _auth.signInWithCredential(credencialFirebase);
   }
 
   Future<void> sair() async {
