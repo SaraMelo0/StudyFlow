@@ -165,6 +165,7 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
                 const SizedBox(height: 28),
                 SecaoLoginSocial(
                   temaTexto: temaTexto,
+                  exibirGoogle: googleSignInDisponivel,
                   aoGoogle: _carregando ? null : _aoGoogle,
                   aoAutenticacaoSocial:
                       _carregando ? null : _mostrarEmBreve,
