@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,30 +63,37 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
     setState(() => _carregando = true);
     try {
       await acao();
-      if (!mounted) return;
-      context.coordenador.mostrarDashboard(context);
     } on DominioNaoPermitidoException {
       _mostrarErro('Apenas contas @souunit.com.br são permitidas.');
+      return;
     } on LoginCanceladoException {
       return;
     } on FirebaseAuthException catch (e) {
       _mostrarErro(mensagemErroAutenticacao(e));
+      return;
     } on PlatformException catch (e) {
       final mensagem = mensagemErroGoogleSignIn(e);
       if (mensagem.isNotEmpty) _mostrarErro(mensagem);
-    } catch (e) {
+      return;
+    } catch (e, stack) {
+      debugPrint('Erro autenticação: $e\n$stack');
       final texto = e.toString();
-      if (texto.contains('Login cancelado') ||
-          texto.contains('credencial do Google')) {
-        if (texto.contains('credencial do Google')) {
-          _mostrarErro('Não foi possível entrar com Google. Tente novamente.');
-        }
+      if (texto.contains('credencial do Google')) {
+        _mostrarErro('Não foi possível entrar com Google. Tente novamente.');
         return;
       }
-      _mostrarErro('Erro inesperado. Tente novamente.');
+      _mostrarErro(
+        kDebugMode
+            ? 'Erro: $e'
+            : 'Não foi possível entrar. Tente novamente.',
+      );
+      return;
     } finally {
       if (mounted) setState(() => _carregando = false);
     }
+
+    if (!mounted) return;
+    await context.coordenador.mostrarDashboard(context);
   }
 
   Future<void> _aoEntrar() async {
