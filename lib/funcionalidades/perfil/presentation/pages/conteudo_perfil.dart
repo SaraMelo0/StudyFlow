@@ -31,6 +31,7 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
   final _controladorScroll = ScrollController();
   final _chaveSecaoMetas = GlobalKey();
   final _repositorioMetas = injecaoAplicacao.repositorioMetas;
+  final _servicoNotificacoes = injecaoAplicacao.servicoNotificacoes;
 
   void irParaMetas() {
     final contextoMetas = _chaveSecaoMetas.currentContext;
@@ -68,6 +69,7 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
     try {
       await _repositorioMetas.criar(nova);
       _mostrarSnackBar(TextosAplicacao.perfilMetaCriada.texto);
+      await _servicoNotificacoes.notificarMetaCriada(nova.titulo);
     } catch (e) {
       _mostrarErro(e);
     }
@@ -80,6 +82,7 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
     try {
       await _repositorioMetas.atualizar(atualizada);
       _mostrarSnackBar(TextosAplicacao.perfilMetaSalva.texto);
+      await _servicoNotificacoes.notificarMetaAtualizada(atualizada.titulo);
     } catch (e) {
       _mostrarErro(e);
     }
@@ -96,6 +99,7 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
   Future<void> _aoMarcarConcluida(MetaEstudo meta) async {
     try {
       await _repositorioMetas.atualizar(meta.copyWith(concluida: true));
+      await _servicoNotificacoes.notificarMetaConcluida(meta.titulo);
     } catch (e) {
       _mostrarErro(e);
     }
@@ -104,6 +108,7 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
   Future<void> _aoExcluir(MetaEstudo meta) async {
     try {
       await _repositorioMetas.excluir(meta.id);
+      await _servicoNotificacoes.notificarMetaRemovida(meta.titulo);
     } catch (e) {
       _mostrarErro(e);
     }
@@ -112,6 +117,7 @@ class ConteudoPerfilEstado extends State<ConteudoPerfil> {
   Future<void> _aoRemover(MetaEstudo meta) async {
     try {
       await _repositorioMetas.excluir(meta.id);
+      await _servicoNotificacoes.notificarMetaRemovida(meta.titulo);
     } catch (e) {
       _mostrarErro(e);
     }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,13 +27,39 @@ class NotificationsPage extends StatefulWidget {
 
 class _NotificationsPageState extends State<NotificationsPage> {
   static const double _espacoInferiorBarra = 88;
+  static const Duration _intervalorFoco = Duration(minutes: 3);
 
   final _repositorio = injecaoAplicacao.repositorioNotificacoes;
+  final _servicoNotificacoes = injecaoAplicacao.servicoNotificacoes;
+  Timer? _timerFoco;
 
   @override
   void initState() {
     super.initState();
-    _repositorio.semearSeVazio();
+    _limparMockados();
+    _timerFoco = Timer.periodic(_intervalorFoco, (_) => _dispararFoco());
+  }
+
+  @override
+  void dispose() {
+    _timerFoco?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _limparMockados() async {
+    try {
+      await _repositorio.limparNotificacoesMockadas();
+    } catch (_) {
+      // Limpeza é silenciosa; não interrompe o fluxo principal.
+    }
+  }
+
+  Future<void> _dispararFoco() async {
+    try {
+      await _servicoNotificacoes.notificarFoco();
+    } catch (_) {
+      // Timer é efeito colateral; falha não afeta a tela.
+    }
   }
 
   Future<void> _marcarComoLida(String id) async {

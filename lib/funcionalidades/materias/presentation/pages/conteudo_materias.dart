@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:study_flow/coordinator/injetor_aplicacao.dart';
 import 'package:study_flow/funcionalidades/materias/domain/materia.dart';
 import 'package:study_flow/funcionalidades/materias/presentation/widgets/cabecalho_materias.dart';
 import 'package:study_flow/funcionalidades/materias/presentation/widgets/card_materia.dart';
@@ -16,6 +17,8 @@ class ConteudoMaterias extends StatefulWidget {
 
 class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
   static const double _espacoInferiorBarra = 88;
+
+  final _servicoNotificacoes = injecaoAplicacao.servicoNotificacoes;
 
   final List<Materia> _materias = [
     const Materia(
@@ -53,16 +56,22 @@ class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
     );
     if (resultado == null || !mounted) return;
 
+    final novaMateria = Materia(
+      id: '${_proximoId++}',
+      nome: resultado.nome,
+      horasEstudadas: 0,
+      progressoPercentual: resultado.progressoPercentual,
+    );
+
     setState(() {
-      _materias.add(
-        Materia(
-          id: '${_proximoId++}',
-          nome: resultado.nome,
-          horasEstudadas: 0,
-          progressoPercentual: resultado.progressoPercentual,
-        ),
-      );
+      _materias.add(novaMateria);
     });
+
+    try {
+      await _servicoNotificacoes.notificarMateriaCriada(novaMateria.nome);
+    } catch (_) {
+      // Notificação é efeito colateral; falha não interrompe o fluxo principal.
+    }
   }
 
   Future<void> _abrirEditarMateria(Materia materia) async {
@@ -76,18 +85,34 @@ class _ConteudoMateriasEstado extends State<ConteudoMaterias> {
     final indice = _materias.indexWhere((m) => m.id == materia.id);
     if (indice == -1) return;
 
+    final atualizada = materia.copyWith(
+      nome: resultado.nome,
+      progressoPercentual: resultado.progressoPercentual,
+    );
+
     setState(() {
-      _materias[indice] = materia.copyWith(
-        nome: resultado.nome,
-        progressoPercentual: resultado.progressoPercentual,
-      );
+      _materias[indice] = atualizada;
     });
+
+    try {
+      await _servicoNotificacoes.notificarMateriaAtualizada(atualizada.nome);
+    } catch (_) {
+      // Notificação é efeito colateral; falha não interrompe o fluxo principal.
+    }
   }
 
-  void _excluirMateria(Materia materia) {
+  Future<void> _excluirMateria(Materia materia) async {
+    final nome = materia.nome;
+
     setState(() {
       _materias.removeWhere((m) => m.id == materia.id);
     });
+
+    try {
+      await _servicoNotificacoes.notificarMateriaRemovida(nome);
+    } catch (_) {
+      // Notificação é efeito colateral; falha não interrompe o fluxo principal.
+    }
   }
 
   @override
