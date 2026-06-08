@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
 import 'package:google_sign_in/google_sign_in.dart';
 
 const dominioInstitucional = '@souunit.com.br';
@@ -15,12 +17,26 @@ class DominioNaoPermitidoException implements Exception {}
 
 class LoginCanceladoException implements Exception {}
 
+class GoogleSignInIndisponivelException implements Exception {}
+
+GoogleSignIn criarGoogleSignIn() {
+  return GoogleSignIn(
+    scopes: ['email'],
+    clientId: kIsWeb ? idClienteWebGoogle : null,
+    serverClientId: kIsWeb ? null : idClienteWebGoogle,
+  );
+}
+
+bool get googleSignInDisponivel {
+  if (kIsWeb) return true;
+  return defaultTargetPlatform != TargetPlatform.windows &&
+      defaultTargetPlatform != TargetPlatform.linux;
+}
+
 class ServicoAutenticacao {
   ServicoAutenticacao({FirebaseAuth? auth, GoogleSignIn? googleSignIn})
     : _auth = auth ?? FirebaseAuth.instance,
-      _googleSignIn =
-          googleSignIn ??
-          GoogleSignIn(serverClientId: idClienteWebGoogle, scopes: ['email']);
+      _googleSignIn = googleSignIn ?? criarGoogleSignIn();
 
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn;
@@ -57,6 +73,10 @@ class ServicoAutenticacao {
   }
 
   Future<User> entrarComGoogle() async {
+    if (!googleSignInDisponivel) {
+      throw GoogleSignInIndisponivelException();
+    }
+
     final contaGoogle = await _googleSignIn.signIn();
     if (contaGoogle == null) {
       throw LoginCanceladoException();
