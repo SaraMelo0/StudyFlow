@@ -30,9 +30,9 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
 
   void _mostrarErro(String mensagem) {
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(mensagem)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(mensagem)));
   }
 
   void _aoEsqueceuSenha() {
@@ -160,9 +160,9 @@ class _PaginaLoginEstado extends State<PaginaLogin> {
                 const SizedBox(height: 28),
                 SecaoLoginSocial(
                   temaTexto: temaTexto,
+                  exibirGoogle: googleSignInDisponivel,
                   aoGoogle: _carregando ? null : _aoGoogle,
-                  aoAutenticacaoSocial:
-                      _carregando ? null : _mostrarEmBreve,
+                  aoAutenticacaoSocial: _carregando ? null : _mostrarEmBreve,
                 ),
                 SizedBox(height: 32 + margemInferior),
                 RodapeCadastro(

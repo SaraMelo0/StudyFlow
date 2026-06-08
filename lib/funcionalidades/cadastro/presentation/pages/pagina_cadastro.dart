@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:study_flow/coordinator/coordenador_navegacao.dart';
+import 'package:study_flow/coordinator/injetor_aplicacao.dart';
 import 'package:study_flow/core/strings/textos_aplicacao.dart';
 import 'package:study_flow/core/theme/cores_aplicacao.dart';
 import 'package:study_flow/core/widgets/botao_principal.dart';
 import 'package:study_flow/core/widgets/cabecalho_logo.dart';
+import 'package:study_flow/funcionalidades/autenticacao/data/mensagens_erro_autenticacao.dart';
+import 'package:study_flow/funcionalidades/autenticacao/data/servico_autenticacao.dart';
 import 'package:study_flow/funcionalidades/cadastro/presentation/widgets/cartao_dados_cadastro.dart';
 import 'package:study_flow/funcionalidades/cadastro/presentation/widgets/rodape_login.dart';
 import 'package:study_flow/funcionalidades/cadastro/presentation/widgets/secao_aceite_termos.dart';
@@ -25,6 +29,7 @@ class _PaginaCadastroEstado extends State<PaginaCadastro> {
   final _controladorSenha = TextEditingController();
   final _controladorConfirmarSenha = TextEditingController();
   bool _aceitouTermos = false;
+  bool _carregando = false;
 
   @override
   void dispose() {
@@ -35,6 +40,13 @@ class _PaginaCadastroEstado extends State<PaginaCadastro> {
     super.dispose();
   }
 
+  void _mostrarErro(String mensagem) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(mensagem)),
+    );
+  }
+
   void _mostrarEmBreve() {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -42,13 +54,67 @@ class _PaginaCadastroEstado extends State<PaginaCadastro> {
     );
   }
 
-  void _aoCadastrar() {
-    if (!_aceitouTermos) return;
-    EscopoCoordenadorNavegacao.de(context).mostrarDashboard(context);
+  String? _validarFormulario() {
+    final nome = _controladorNome.text.trim();
+    final email = _controladorEmail.text.trim();
+    final senha = _controladorSenha.text;
+    final confirmarSenha = _controladorConfirmarSenha.text;
+
+    if (nome.isEmpty) return 'Preencha seu nome.';
+    if (email.isEmpty) return 'Preencha o e-mail.';
+    if (!emailPermitido(email)) {
+      return 'Use um e-mail institucional @souunit.com.br.';
+    }
+    if (senha.isEmpty) return 'Preencha a senha.';
+    if (senha.length < 6) return 'A senha deve ter pelo menos 6 caracteres.';
+    if (senha != confirmarSenha) return 'As senhas não coincidem.';
+    return null;
+  }
+
+  Future<void> _cadastrar(Future<void> Function() acao) async {
+    if (_carregando) return;
+
+    setState(() => _carregando = true);
+    try {
+      await acao();
+      if (!mounted) return;
+      context.coordenador.mostrarDashboard(context);
+    } on DominioNaoPermitidoException {
+      _mostrarErro('Apenas contas @souunit.com.br são permitidas.');
+    } on FirebaseAuthException catch (e) {
+      _mostrarErro(mensagemErroAutenticacao(e, cadastro: true));
+    } catch (_) {
+      _mostrarErro('Não foi possível criar a conta. Tente novamente.');
+    } finally {
+      if (mounted) setState(() => _carregando = false);
+    }
+  }
+
+  Future<void> _aoCadastrar() async {
+    if (!_aceitouTermos || _carregando) return;
+
+    final erro = _validarFormulario();
+    if (erro != null) {
+      _mostrarErro(erro);
+      return;
+    }
+
+    final nome = _controladorNome.text.trim();
+    final email = _controladorEmail.text.trim();
+    final senha = _controladorSenha.text;
+
+    await _cadastrar(
+      () => injecaoAplicacao.servicoAutenticacao.cadastrarComEmail(
+        email,
+        senha,
+        nome: nome,
+      ),
+    );
   }
 
   void _aoEntrar() {
-    EscopoCoordenadorNavegacao.de(context).substituirPorLogin(context);
+    if (_carregando) return;
+    context.coordenador.substituirPorLogin(context);
   }
 
   @override
@@ -59,94 +125,106 @@ class _PaginaCadastroEstado extends State<PaginaCadastro> {
     return Scaffold(
       backgroundColor: CoresAplicacao.fundo,
       body: SafeArea(
-        child: LayoutBuilder(
-          builder: (contextoLayout, restricoes) {
-            final tecladoInferior = MediaQuery.viewInsetsOf(context).bottom;
-            return SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.fromLTRB(24, 0, 24, 24 + tecladoInferior),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: restricoes.maxHeight),
-                child: Center(
+        child: Stack(
+          children: [
+            LayoutBuilder(
+              builder: (contextoLayout, restricoes) {
+                final tecladoInferior = MediaQuery.viewInsetsOf(context).bottom;
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.fromLTRB(24, 0, 24, 24 + tecladoInferior),
                   child: ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxWidth: _larguraMaximaConteudo,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const SizedBox(height: 4),
-                        CabecalhoLogo(
-                          aoVoltar: () {
-                            EscopoCoordenadorNavegacao.de(
-                              context,
-                            ).voltar(context);
-                          },
+                    constraints: BoxConstraints(minHeight: restricoes.maxHeight),
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: _larguraMaximaConteudo,
                         ),
-                        const SizedBox(height: 16),
-                        Text(
-                          TextosAplicacao.cadastroTitulo.texto,
-                          textAlign: TextAlign.center,
-                          style: temaTexto.headlineSmall?.copyWith(
-                            color: CoresAplicacao.laranja,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 26,
-                            height: 1.2,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const SizedBox(height: 4),
+                            CabecalhoLogo(
+                              aoVoltar: _carregando
+                                  ? null
+                                  : () => context.coordenador.voltar(context),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              TextosAplicacao.cadastroTitulo.texto,
+                              textAlign: TextAlign.center,
+                              style: temaTexto.headlineSmall?.copyWith(
+                                color: CoresAplicacao.laranja,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 26,
+                                height: 1.2,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              TextosAplicacao.cadastroSubtitulo.texto,
+                              textAlign: TextAlign.center,
+                              style: temaTexto.titleMedium?.copyWith(
+                                color: CoresAplicacao.marromEscuro,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                                height: 1.35,
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            CartaoDadosCadastro(
+                              controladorNome: _controladorNome,
+                              controladorEmail: _controladorEmail,
+                              controladorSenha: _controladorSenha,
+                              controladorConfirmarSenha:
+                                  _controladorConfirmarSenha,
+                              temaTexto: temaTexto,
+                            ),
+                            const SizedBox(height: 20),
+                            SecaoAceiteTermos(
+                              temaTexto: temaTexto,
+                              aceito: _aceitouTermos,
+                              aoAlterarAceite: (valor) {
+                                if (_carregando) return;
+                                setState(() => _aceitouTermos = valor ?? false);
+                              },
+                              aoTermosUso: _mostrarEmBreve,
+                              aoPoliticaPrivacidade: _mostrarEmBreve,
+                            ),
+                            const SizedBox(height: 20),
+                            Opacity(
+                              opacity: _aceitouTermos ? 1 : 0.55,
+                              child: BotaoPrincipal(
+                                rotulo:
+                                    TextosAplicacao.cadastroBotaoConfirmar.texto,
+                                temaTexto: temaTexto,
+                                aoPressionar: _aceitouTermos && !_carregando
+                                    ? _aoCadastrar
+                                    : () {},
+                              ),
+                            ),
+                            SizedBox(height: 28 + margemInferior),
+                            RodapeLogin(
+                              temaTexto: temaTexto,
+                              aoEntrar: _aoEntrar,
+                              aoTermosUso: _mostrarEmBreve,
+                              aoPoliticaPrivacidade: _mostrarEmBreve,
+                            ),
+                            const SizedBox(height: 16),
+                          ],
                         ),
-                        const SizedBox(height: 10),
-                        Text(
-                          TextosAplicacao.cadastroSubtitulo.texto,
-                          textAlign: TextAlign.center,
-                          style: temaTexto.titleMedium?.copyWith(
-                            color: CoresAplicacao.marromEscuro,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            height: 1.35,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        CartaoDadosCadastro(
-                          controladorNome: _controladorNome,
-                          controladorEmail: _controladorEmail,
-                          controladorSenha: _controladorSenha,
-                          controladorConfirmarSenha: _controladorConfirmarSenha,
-                          temaTexto: temaTexto,
-                        ),
-                        const SizedBox(height: 20),
-                        SecaoAceiteTermos(
-                          temaTexto: temaTexto,
-                          aceito: _aceitouTermos,
-                          aoAlterarAceite: (valor) {
-                            setState(() => _aceitouTermos = valor ?? false);
-                          },
-                          aoTermosUso: _mostrarEmBreve,
-                          aoPoliticaPrivacidade: _mostrarEmBreve,
-                        ),
-                        const SizedBox(height: 20),
-                        Opacity(
-                          opacity: _aceitouTermos ? 1 : 0.55,
-                          child: BotaoPrincipal(
-                            rotulo: TextosAplicacao.cadastroBotaoConfirmar.texto,
-                            temaTexto: temaTexto,
-                            aoPressionar: _aceitouTermos ? _aoCadastrar : () {},
-                          ),
-                        ),
-                        SizedBox(height: 28 + margemInferior),
-                        RodapeLogin(
-                          temaTexto: temaTexto,
-                          aoEntrar: _aoEntrar,
-                          aoTermosUso: _mostrarEmBreve,
-                          aoPoliticaPrivacidade: _mostrarEmBreve,
-                        ),
-                        const SizedBox(height: 16),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                );
+              },
+            ),
+            if (_carregando)
+              const ColoredBox(
+                color: Color(0x33FFFFFF),
+                child: Center(child: CircularProgressIndicator()),
               ),
-            );
-          },
+          ],
         ),
       ),
     );
