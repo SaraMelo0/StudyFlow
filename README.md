@@ -5,7 +5,8 @@
 | Nome do Aluno | Responsabilidades |
 |---|---|
 | Sara Santos de Melo | Tela Inicial / Dashboard / Perfil | Link do vídeo: https://youtu.be/ve_TNb9jIIM?si=0FwvqbpPlmRmMLgh
-| Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias |
+| Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias | 
+
 | Victor Ferreira | Sem função |
 | Julia Cabral da Silva | Desenvolvimento do Timer e Controle de Sessões |
 | Arthur de Sousa Bastos | Navegação entre Telas e Gerenciamento de Rotas |
@@ -38,3 +39,9 @@ O **StudyFlow** é um aplicativo mobile desenvolvido com o objetivo de auxiliar 
 - Dart
 - GitHub
 - Figma (Protótipo)
+
+---
+
+# 🚀 Apresentações
+
+Gilvan dos Santos Moura Junior - https://www.youtube.com/watch?v=uCcU6MERacc
