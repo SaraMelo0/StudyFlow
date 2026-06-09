@@ -14,7 +14,8 @@ class RepositorioMetasFirestore {
       _firestore.collection(colecaoMetas);
 
   Stream<List<MetaEstudo>> observarMetas() {
-    final email = exigirEmailUsuarioLogado();
+    final email = emailUsuarioLogadoOuNull();
+    if (email == null) return Stream.value(const <MetaEstudo>[]);
     return _colecao
         .where(campoCriadoPor, isEqualTo: email)
         .snapshots()
