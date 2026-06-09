@@ -15,16 +15,16 @@ class ConfiguracoesControle {
     required bool lembretesMetas,
     required int metaDiaria,
   }) async {
-    String? uidUsuario = _auth.currentUser?.uid;
     String? emailUsuario = _auth.currentUser?.email;
 
-    if (uidUsuario == null) {
+    if (emailUsuario == null) {
       print("Erro Técnico: Nenhum usuário autenticado no Firebase.");
       return;
     }
 
     try {
-      await _firestore.collection('metas').doc(uidUsuario).set({
+      await _firestore.collection('configuracoes').doc(emailUsuario).set({
+        'criado_por': emailUsuario,
         'usuario_logado': emailUsuario,
         'atualizado_em': FieldValue.serverTimestamp(),
         'timer_pomodoro': {
@@ -50,11 +50,11 @@ class ConfiguracoesControle {
   }
 
   Future<void> apagarTodosOsDados() async {
-    String? uidUsuario = _auth.currentUser?.uid;
-    if (uidUsuario == null) return;
+    String? emailUsuario = _auth.currentUser?.email;
+    if (emailUsuario == null) return;
 
     try {
-      await _firestore.collection('metas').doc(uidUsuario).delete();
+      await _firestore.collection('configuracoes').doc(emailUsuario).delete();
       print("Sucesso: Configurações deletadas do Firestore.");
     } catch (e) {
       print("Erro ao deletar documento do Firestore: $e");
@@ -62,7 +62,7 @@ class ConfiguracoesControle {
   }
 
   Stream<DocumentSnapshot> escutarConfiguracoes() {
-    String? uidUsuario = _auth.currentUser?.uid;
-    return _firestore.collection('metas').doc(uidUsuario).snapshots();
+    String? emailUsuario = _auth.currentUser?.email;
+    return _firestore.collection('configuracoes').doc(emailUsuario).snapshots();
   }
 }
