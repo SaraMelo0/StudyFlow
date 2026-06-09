@@ -2,9 +2,9 @@
 
 ## 👥 Integrantes do Grupo
 
-| Nome do Aluno | Responsabilidades | Link do Vídeo
+| Nome do Aluno | Responsabilidades | Link do Vídeo |
 
-| Sara Santos de Melo | Tela Inicial / Dashboard / Perfil | Link do vídeo: https://youtu.be/ve_TNb9jIIM?si=0FwvqbpPlmRmMLgh
+| Sara Santos de Melo | Tela Inicial / Dashboard / Perfil | Link do vídeo: https://youtu.be/ve_TNb9jIIM?si=0FwvqbpPlmRmMLgh |
 
 | Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias | 
 
