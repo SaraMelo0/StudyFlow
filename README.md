@@ -4,7 +4,7 @@
 
 | Nome do Aluno | Responsabilidades |
 |---|---|
-| Sara Santos de Melo | Tela Inicial / Dashboard / Perfil |
+| Sara Santos de Melo | Tela Inicial / Dashboard / Perfil | Link do vídeo: https://youtu.be/ve_TNb9jIIM?si=0FwvqbpPlmRmMLgh
 | Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias |
 | Victor Ferreira | Sem função |
 | Julia Cabral da Silva | Desenvolvimento do Timer e Controle de Sessões |
