@@ -5,6 +5,7 @@ import 'package:study_flow/coordinator/rotas_navegacao.dart';
 import 'package:study_flow/funcionalidades/cadastro/presentation/pages/pagina_cadastro.dart';
 import 'package:study_flow/funcionalidades/login/presentation/pages/pagina_login.dart';
 import 'package:study_flow/funcionalidades/configuracoes/presentation/pages/pagina_configuracoes.dart';
+import 'package:study_flow/funcionalidades/login/presentation/pages/pagina_recuperar_senha.dart';
 
 final class CoordenadorNavegacao {
   NavigatorState _navegador(BuildContext contexto) =>
@@ -31,10 +32,15 @@ final class CoordenadorNavegacao {
     contexto,
   ).push<void>(_rota(RotasNavegacao.cadastro, const PaginaCadastro()));
 
-  Future<void> mostrarConfiguracoes(BuildContext contexto) => 
-    _navegador(contexto).push<void>(
-      _rota(RotasNavegacao.configuracoes, const PaginaConfiguracoes())
-    );
+  Future<void> mostrarConfiguracoes(BuildContext contexto) =>
+      _navegador(contexto).push<void>(
+        _rota(RotasNavegacao.configuracoes, const PaginaConfiguracoes()),
+      );
+
+  Future<void> mostrarRecuperarSenha(BuildContext contexto) =>
+      _navegador(contexto).push<void>(
+        _rota(RotasNavegacao.recuperarSenha, const PaginaRecuperarSenha()),
+      );
 
   Future<void> substituirPorLogin(BuildContext contexto) =>
       _substituir(contexto, RotasNavegacao.login, const PaginaLogin());

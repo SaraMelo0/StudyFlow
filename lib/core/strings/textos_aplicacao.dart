@@ -51,30 +51,18 @@ enum TextosAplicacao {
   cadastroAvisoLegalMeio(' e '),
   funcionalidadeEmBreve('Esta função ainda será implementada.'),
 
-  dashboardSaudacao('Olá, Junior 📚'),
   dashboardHoje('Hoje'),
-  dashboardTempoEstudado('01h 45m'),
   dashboardTempoEstudadoRotulo('Tempo estudado'),
-  dashboardSessoesConcluidas('4'),
   dashboardSessoesConcluidasRotulo('Sessões concluídas'),
-  dashboardSequenciaDias('15 dias'),
   dashboardSequenciaRotulo('Sequência atual'),
   dashboardProgressoSemanal('Progresso Semanal'),
-  dashboardProgressoHoras('08h 15m de 10h'),
-  dashboardProgressoPercentual('83%'),
   dashboardIniciarSessao('Iniciar Sessão de Estudo'),
-  dashboardTotalEstudado('38h'),
   dashboardTotalEstudadoRotulo('Total estudado'),
-  dashboardMetas('3'),
   dashboardMetasRotulo('Metas'),
-  dashboardMaterias('4'),
   dashboardMateriasRotulo('Matérias'),
-  dashboardSessoes('10'),
   dashboardSessoesRotulo('Sessões'),
   dashboardProximaMeta('Próxima meta'),
   dashboardVer('Ver'),
-  dashboardMetaTitulo('Concluir UX/UI'),
-  dashboardMetaPrazo('Prazo: 31/03/2026'),
   materiasTitulo('Minhas Matérias'),
   materiasSubtituloSingular('1 matéria cadastrada'),
   materiasSubtituloPlural('matérias cadastradas'),
@@ -88,10 +76,11 @@ enum TextosAplicacao {
   materiasCancelar('Cancelar'),
   materiasAdicionar('Adicionar'),
   materiasSalvar('Salvar'),
+  materiasErroCarregar(
+    'Não foi possível carregar suas matérias. Tente novamente.',
+  ),
   perfilTitulo('Perfil & Metas'),
   perfilSubtitulo('Defina e acompanhe seus objetivos'),
-  perfilNome('Junior Moura'),
-  perfilEmail('juniormoura@email.com'),
   perfilConfiguracoes('Configurações'),
   perfilConfiguracoesSub('Timer, notificações e mais'),
   perfilSairConta('Sair da conta'),
@@ -124,22 +113,38 @@ enum TextosAplicacao {
   perfilMetasAtivas('Metas Ativas'),
   perfilMetasConcluidas('Metas Concluídas'),
   perfilEditar('Editar'),
-  perfilMetaAtivaTitulo('Concluir UX/UI'),
-  perfilMetaAtivaDescricao(
-    'Estudar todos os capítulos do livro e fazer exercícios',
-  ),
-  perfilDiasRestantes('15 dias restantes'),
   perfilProgresso('Progresso'),
-  perfilEtapasProgresso('2/4 etapas'),
-  perfilEtapa1('Conceitos básicos de UX e UI'),
-  perfilEtapa2('Princípios de UX'),
-  perfilEtapa3('Design de Interface (UI)'),
-  perfilEtapa4('Wireframes, protótipos e mockups'),
   perfilMarcarConcluida('Marcar como concluída'),
   perfilExcluir('Excluir'),
-  perfilMetaConcluidaTitulo('Concluir Estrutura de Dados'),
   perfilMetaConcluidaStatus('Concluída'),
-  perfilRemover('Remover');
+  perfilRemover('Remover'),
+  perfilErroCarregarMetas(
+    'Não foi possível carregar suas metas. Verifique sua conexão e tente novamente.',
+  ),
+
+  recuperarSenhaTitulo('Recuperar Senha'),
+  recuperarSenhaSubtitulo(
+    'Digite seu e-mail institucional para receber o link de redefinição',
+  ),
+  recuperarSenhaBotao('Enviar link'),
+  recuperarSenhaSegurancaTitulo('Segurança em primeiro lugar'),
+  recuperarSenhaSegurancaTexto(
+    'Suas informações estão protegidas. Nunca compartilhe sua senha com ninguém.',
+  ),
+  recuperarSenhaSucessoTitulo('Link enviado!'),
+  recuperarSenhaSucessoTexto(
+    'Verifique sua caixa de entrada e siga as instruções para redefinir sua senha.',
+  ),
+  recuperarSenhaAvisoDominio(
+    'Apenas contas @souunit.com.br podem recuperar a senha por aqui.',
+  ),
+  recuperarSenhaBotaoVoltar('Voltar ao login'),
+
+  notificacoesTitulo('Notificações'),
+  notificacoesNenhuma('Nenhuma notificação'),
+  notificacoesErroCarregar(
+    'Não foi possível carregar as notificações. Verifique sua conexão.',
+  );
 
   const TextosAplicacao(this.texto);
   final String texto;

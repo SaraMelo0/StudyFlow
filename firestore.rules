@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /materias/{materiaId} {
+      allow read: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+
+      allow create: if request.auth != null
+        && request.resource.data.criado_por == request.auth.token.email;
+
+      allow update: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email
+        && request.resource.data.criado_por == resource.data.criado_por;
+
+      allow delete: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+    }
+
+    match /metas/{metaId} {
+      allow read: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+
+      allow create: if request.auth != null
+        && request.resource.data.criado_por == request.auth.token.email;
+
+      allow update: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email
+        && request.resource.data.criado_por == resource.data.criado_por;
+
+      allow delete: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+    }
+
+    match /sessoes_estudo/{sessaoId} {
+      allow read: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+
+      allow create: if request.auth != null
+        && request.resource.data.criado_por == request.auth.token.email;
+
+      allow update: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email
+        && request.resource.data.criado_por == resource.data.criado_por;
+
+      allow delete: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+    }
+
+    match /notificacoes/{notificacaoId} {
+      allow read: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+
+      allow create: if request.auth != null
+        && request.resource.data.criado_por == request.auth.token.email;
+
+      allow update: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email
+        && request.resource.data.criado_por == resource.data.criado_por;
+
+      allow delete: if request.auth != null
+        && resource.data.criado_por == request.auth.token.email;
+    }
+  }
+}

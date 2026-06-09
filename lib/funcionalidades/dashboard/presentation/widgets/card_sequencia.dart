@@ -5,9 +5,14 @@ import 'package:study_flow/core/theme/cores_aplicacao.dart';
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_dashboard.dart';
 
 class CardSequencia extends StatelessWidget {
-  const CardSequencia({super.key, required this.temaTexto});
+  const CardSequencia({
+    super.key,
+    required this.temaTexto,
+    required this.sequenciaDias,
+  });
 
   final TextTheme temaTexto;
+  final String sequenciaDias;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +41,7 @@ class CardSequencia extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  TextosAplicacao.dashboardSequenciaDias.texto,
+                  sequenciaDias,
                   style: temaTexto.titleMedium?.copyWith(
                     color: CoresAplicacao.preto,
                     fontWeight: FontWeight.w400,
