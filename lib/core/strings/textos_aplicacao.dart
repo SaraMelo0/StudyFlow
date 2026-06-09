@@ -120,6 +120,30 @@ enum TextosAplicacao {
   perfilRemover('Remover'),
   perfilErroCarregarMetas(
     'Não foi possível carregar suas metas. Verifique sua conexão e tente novamente.',
+  ),
+
+  recuperarSenhaTitulo('Recuperar Senha'),
+  recuperarSenhaSubtitulo(
+    'Digite seu e-mail institucional para receber o link de redefinição',
+  ),
+  recuperarSenhaBotao('Enviar link'),
+  recuperarSenhaSegurancaTitulo('Segurança em primeiro lugar'),
+  recuperarSenhaSegurancaTexto(
+    'Suas informações estão protegidas. Nunca compartilhe sua senha com ninguém.',
+  ),
+  recuperarSenhaSucessoTitulo('Link enviado!'),
+  recuperarSenhaSucessoTexto(
+    'Verifique sua caixa de entrada e siga as instruções para redefinir sua senha.',
+  ),
+  recuperarSenhaAvisoDominio(
+    'Apenas contas @souunit.com.br podem recuperar a senha por aqui.',
+  ),
+  recuperarSenhaBotaoVoltar('Voltar ao login'),
+
+  notificacoesTitulo('Notificações'),
+  notificacoesNenhuma('Nenhuma notificação'),
+  notificacoesErroCarregar(
+    'Não foi possível carregar as notificações. Verifique sua conexão.',
   );
 
   const TextosAplicacao(this.texto);

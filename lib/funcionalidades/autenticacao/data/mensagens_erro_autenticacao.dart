@@ -42,6 +42,21 @@ String mensagemErroAutenticacao(
   }
 }
 
+String mensagemErroRedefinicaoSenha(FirebaseAuthException erro) {
+  switch (erro.code) {
+    case 'user-not-found':
+      return 'Não encontramos uma conta com este e-mail.';
+    case 'invalid-email':
+      return 'E-mail inválido.';
+    case 'too-many-requests':
+      return 'Muitas tentativas. Aguarde e tente novamente.';
+    case 'network-request-failed':
+      return 'Sem conexão. Verifique sua internet.';
+    default:
+      return 'Não foi possível enviar o link. Tente novamente.';
+  }
+}
+
 String mensagemErroGoogleSignIn(PlatformException erro) {
   final detalhe = '${erro.message ?? ''} ${erro.details ?? ''}'.toLowerCase();
 

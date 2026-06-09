@@ -134,6 +134,11 @@ class ServicoAutenticacao {
     return _auth.signInWithCredential(credencialFirebase);
   }
 
+  Future<void> enviarEmailRedefinicaoSenha(String email) async {
+    if (!emailPermitido(email)) throw DominioNaoPermitidoException();
+    await _auth.sendPasswordResetEmail(email: email.trim());
+  }
+
   Future<void> sair() async {
     await Future.wait([_auth.signOut(), _googleSignIn.signOut()]);
   }

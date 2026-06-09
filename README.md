@@ -2,15 +2,21 @@
 
 ## 👥 Integrantes do Grupo
 
-| Nome do Aluno | Responsabilidades |
-|---|---|
-| Sara Santos de Melo | Tela Inicial / Dashboard / Perfil |
-| Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias |
+| Nome do Aluno | Responsabilidades | Link do Vídeo |
+
+| Sara Santos de Melo | Tela Inicial / Dashboard / Perfil | Link do vídeo: https://youtu.be/ve_TNb9jIIM?si=0FwvqbpPlmRmMLgh |
+
+| Gilvan dos Santos Moura Junior | Tela de Cadastro e Gerenciamento de Matérias | Link do vídeo: https://www.youtube.com/watch?v=uCcU6MERacc |
+
 | Victor Ferreira | Sem função |
+
 | Julia Cabral da Silva | Desenvolvimento do Timer e Controle de Sessões |
+
 | Arthur de Sousa Bastos | Navegação entre Telas e Gerenciamento de Rotas |
+
 | João Pedro Rocha Silva Valadares | Histórico de Sessões |
-| Helena Passos Farias | Documentação, suporte de código e Organização do Projeto |
+
+| Helena Passos Farias | Documentação, Tela de notificação, redefinição de senha e Organização do Projeto | Link do vídeo: https://youtu.be/Y6O8o62r-eM
 
 ---
 
