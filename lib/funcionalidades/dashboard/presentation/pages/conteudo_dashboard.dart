@@ -13,6 +13,7 @@ import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_p
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/card_sequencia.dart';
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/linha_estatisticas.dart';
 import 'package:study_flow/funcionalidades/dashboard/presentation/widgets/secao_hoje.dart';
+import 'package:study_flow/funcionalidades/materias/domain/materia.dart';
 import 'package:study_flow/funcionalidades/perfil/model/meta_estudo.dart';
 
 class ConteudoDashboard extends StatelessWidget {
@@ -66,63 +67,70 @@ class ConteudoDashboard extends StatelessWidget {
           final proxima = proximaMetaAtiva(metas);
           final qtdMetas = contarMetasAtivas(metas);
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                CabecalhoDashboard(
-                  temaTexto: temaTexto,
-                  nomeUsuario: nomeUsuario,
+          return StreamBuilder<List<Materia>>(
+            stream: injecaoAplicacao.repositorioMaterias.observarMaterias(),
+            builder: (context, snapshotMaterias) {
+              final qtdMaterias = snapshotMaterias.data?.length ?? 0;
+
+              return SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    CabecalhoDashboard(
+                      temaTexto: temaTexto,
+                      nomeUsuario: nomeUsuario,
+                    ),
+                    const SizedBox(height: 16),
+                    SecaoHoje(
+                      temaTexto: temaTexto,
+                      tempoEstudado: '0h',
+                      sessoesConcluidas: '0',
+                    ),
+                    const SizedBox(height: 16),
+                    CardSequencia(
+                      temaTexto: temaTexto,
+                      sequenciaDias: '0 dias',
+                    ),
+                    const SizedBox(height: 16),
+                    CardProgressoSemanal(
+                      temaTexto: temaTexto,
+                      horasTexto: '0h de $_placeholder',
+                      percentualTexto: '0%',
+                      valorProgresso: 0,
+                    ),
+                    const SizedBox(height: 20),
+                    BotaoPrincipal(
+                      rotulo: TextosAplicacao.dashboardIniciarSessao.texto,
+                      temaTexto: temaTexto,
+                      aoPressionar: aoMostrarEmBreve,
+                      iconePrefixo: const Icon(
+                        Icons.play_circle_outline_rounded,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    LinhaEstatisticas(
+                      temaTexto: temaTexto,
+                      valorTotalEstudado: _placeholder,
+                      valorMetas: '$qtdMetas',
+                      valorMaterias: '$qtdMaterias',
+                      valorSessoes: _placeholder,
+                    ),
+                    const SizedBox(height: 16),
+                    CardProximaMeta(
+                      temaTexto: temaTexto,
+                      aoVer: aoVerMeta,
+                      titulo: proxima?.titulo ?? 'Nenhuma meta ativa',
+                      prazo: proxima != null
+                          ? 'Prazo: ${formatarDataCurta(proxima.prazo)}'
+                          : 'Crie uma meta no perfil',
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 16),
-                SecaoHoje(
-                  temaTexto: temaTexto,
-                  tempoEstudado: '0h',
-                  sessoesConcluidas: '0',
-                ),
-                const SizedBox(height: 16),
-                CardSequencia(
-                  temaTexto: temaTexto,
-                  sequenciaDias: '0 dias',
-                ),
-                const SizedBox(height: 16),
-                CardProgressoSemanal(
-                  temaTexto: temaTexto,
-                  horasTexto: '0h de $_placeholder',
-                  percentualTexto: '0%',
-                  valorProgresso: 0,
-                ),
-                const SizedBox(height: 20),
-                BotaoPrincipal(
-                  rotulo: TextosAplicacao.dashboardIniciarSessao.texto,
-                  temaTexto: temaTexto,
-                  aoPressionar: aoMostrarEmBreve,
-                  iconePrefixo: const Icon(
-                    Icons.play_circle_outline_rounded,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                LinhaEstatisticas(
-                  temaTexto: temaTexto,
-                  valorTotalEstudado: _placeholder,
-                  valorMetas: '$qtdMetas',
-                  valorMaterias: _placeholder,
-                  valorSessoes: _placeholder,
-                ),
-                const SizedBox(height: 16),
-                CardProximaMeta(
-                  temaTexto: temaTexto,
-                  aoVer: aoVerMeta,
-                  titulo: proxima?.titulo ?? 'Nenhuma meta ativa',
-                  prazo: proxima != null
-                      ? 'Prazo: ${formatarDataCurta(proxima.prazo)}'
-                      : 'Crie uma meta no perfil',
-                ),
-              ],
-            ),
+              );
+            },
           );
         },
       ),
