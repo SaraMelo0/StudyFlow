@@ -47,7 +47,7 @@ class ItemToggleConfiguracao extends StatelessWidget {
           Switch(
             value: valor,
             onChanged: onChanged,
-            activeColor: Colors.white,
+            activeThumbColor: Colors.white,
             activeTrackColor: CoresAplicacao.laranja,
             inactiveThumbColor: Colors.white,
             inactiveTrackColor: CoresAplicacao.cinzaPale,
