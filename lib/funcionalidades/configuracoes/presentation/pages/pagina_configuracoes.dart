@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // ADICIONADO para segurança do escopo
 import 'package:study_flow/core/widgets/barra_navegacao.dart';
 import '../../../../core/theme/cores_aplicacao.dart';
+import '../../controle/configuracoes_controle.dart'; // ADICIONADO import do seu controle
 import '../widgets/cabecalho_configuracoes.dart';
 import '../widgets/secao_conta.dart';
 import '../widgets/secao_timer_pomodoro.dart';
 import '../widgets/secao_notificacoes.dart';
 import '../widgets/secao_meta_diaria.dart';
 import '../widgets/secao_gerenciamento_dados.dart';
-
 
 class PaginaConfiguracoes extends StatefulWidget {
   const PaginaConfiguracoes({super.key});
@@ -17,7 +18,9 @@ class PaginaConfiguracoes extends StatefulWidget {
 }
 
 class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
-  
+  final ConfiguracoesControle _configControle = ConfiguracoesControle();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   int _duracaoFoco = 25;
   int _intervaloCurto = 5;
   int _intervaloLongo = 15;
@@ -28,6 +31,48 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
   bool _lembretesMetas = false;
 
   int _metaDiariaMinutos = 120;
+
+ 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _verificarDominioInstitucional();
+    });
+  }
+
+ 
+  void _verificarDominioInstitucional() async {
+    User? usuarioLogado = _auth.currentUser;
+    if (usuarioLogado != null && usuarioLogado.email != null) {
+      if (!usuarioLogado.email!.endsWith('@souunit.com.br')) {
+        await _auth.signOut();
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Acesso negado! Use seu e-mail @souunit.com.br.'),
+              backgroundColor: Colors.red,
+            ),
+          );
+          Navigator.of(context).pushReplacementNamed('/login');
+        }
+      }
+    }
+  }
+
+  
+  void _sincronizarComFirebase() {
+    _configControle.salvarConfiguracoes(
+      foco: _duracaoFoco,
+      intervaloCurto: _intervaloCurto,
+      intervaloLongo: _intervaloLongo,
+      sessoes: _sessoesAntesIntervaloLongo,
+      ativarNotificacoes: _notificacoesAtivadas,
+      alertasSonoros: _alertasSonoros,
+      lembretesMetas: _lembretesMetas,
+      metaDiaria: _metaDiariaMinutos,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +95,11 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
                   children: [
                     const SizedBox(height: 8),
                     
+                    
                     SecaoConta(
-                      nomeUsuario: 'Junior Moura',
-                      emailUsuario: 'juniormoura@email.com',
-                      avatarUrl: null,
+                      nomeUsuario: _auth.currentUser?.displayName ?? 'Junior Moura',
+                      emailUsuario: _auth.currentUser?.email ?? 'juniormoura@email.com',
+                      avatarUrl: _auth.currentUser?.photoURL,
                       onEditarPerfil: () {},
                       onAlterarSenha: () {},
                     ),
@@ -67,15 +113,19 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
                       sessoesAntesIntervaloLongo: _sessoesAntesIntervaloLongo,
                       onDuracaoFocoChanged: (valor) {
                         setState(() => _duracaoFoco = valor);
+                        _sincronizarComFirebase(); 
                       },
                       onIntervaloCurtoChanged: (valor) {
                         setState(() => _intervaloCurto = valor);
+                        _sincronizarComFirebase(); 
                       },
                       onIntervaloLongoChanged: (valor) {
                         setState(() => _intervaloLongo = valor);
+                        _sincronizarComFirebase(); 
                       },
                       onSessoesChanged: (valor) {
                         setState(() => _sessoesAntesIntervaloLongo = valor);
+                        _sincronizarComFirebase(); 
                       },
                     ),
                     
@@ -87,12 +137,15 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
                       lembretesMetas: _lembretesMetas,
                       onNotificacoesChanged: (valor) {
                         setState(() => _notificacoesAtivadas = valor);
+                        _sincronizarComFirebase(); 
                       },
                       onAlertasSonorosChanged: (valor) {
                         setState(() => _alertasSonoros = valor);
+                        _sincronizarComFirebase(); 
                       },
                       onLembretesMetasChanged: (valor) {
                         setState(() => _lembretesMetas = valor);
+                        _sincronizarComFirebase(); 
                       },
                     ),
                     
@@ -102,6 +155,7 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
                       metaMinutos: _metaDiariaMinutos,
                       onMetaChanged: (valor) {
                         setState(() => _metaDiariaMinutos = valor);
+                        _sincronizarComFirebase(); 
                       },
                     ),
                     
@@ -142,7 +196,7 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.restore, color: Color(0xFF0088FF), size: 22),
+                  const Icon(Icons.restore, color: Color(0xFF0088FF), size: 22),
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
@@ -190,6 +244,7 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
                           _lembretesMetas = false;
                           _metaDiariaMinutos = 120;
                         });
+                        _sincronizarComFirebase(); // MODIFICADO: Atualiza o Firebase com os valores resetados
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
@@ -232,7 +287,7 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      'Restaurar configurações?',
+                      'Restaurar configurações?', // Mantido o seu título original do widget
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -265,7 +320,16 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () async {
+                        // MODIFICADO: Executa a deleção no Firestore ao confirmar
+                        await _configControle.apagarTodosOsDados(); 
+                        if (mounted) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Dados limpos com sucesso na nuvem!')),
+                          );
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: CoresAplicacao.vermelho,
                         shape: RoundedRectangleBorder(
