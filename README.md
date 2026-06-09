@@ -16,7 +16,7 @@
 
 | João Pedro Rocha Silva Valadares | Histórico de Sessões |
 
-| Helena Passos Farias | Documentação, suporte de código e Organização do Projeto |
+| Helena Passos Farias | Documentação, Tela de notificação, redefinição de senha e Organização do Projeto | Link do vídeo: https://youtu.be/Y6O8o62r-eM
 
 ---
 
