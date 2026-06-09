@@ -42,6 +42,6 @@ O **StudyFlow** é um aplicativo mobile desenvolvido com o objetivo de auxiliar 
 
 ---
 
-# 🚀 Apresentações
+# 📹 Apresentações
 
 Gilvan dos Santos Moura Junior - https://www.youtube.com/watch?v=uCcU6MERacc
