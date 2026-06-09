@@ -1,0 +1,149 @@
+[33m8bcd274[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Adição do link do vídeo e atualização de documentação técnica
+[33m4b03648[m Colocando link do video
+[33m5de53e3[m Fix table formatting in README.md
+[33mbb3390b[m Update team members and add video links in README
+[33mcc63e46[m Mudando emoji no readme
+[33ma4fe436[m Update README Adicionando link da apresentação
+[33m4b97fa9[m Update README with video link for Sara Santos de Melo
+[33m52ee171[m Merge branch 'develop' into main
+[33m3e70f44[m Merge branch 'develop' of https://github.com/SaraMelo0/StudyFlow into develop
+[33m520aae3[m[33m ([m[1;31morigin/feature/firebase-auth-helena-v2[m[33m)[m Merge branch 'develop' into feature/firebase-auth-helena-v2
+[33m1ff5319[m[33m ([m[1;31morigin/develop[m[33m)[m Merge branch 'develop' into feature/firebase-auth-helena-v2
+[33m58fc200[m feat(exibir quantidade de matérias em tempo real)
+[33m266d53f[m feat(exibir quantidade de matérias em tempo real)
+[33m5649bb9[m Merge branch 'feature/firebase-auth-sara' into develop
+[33m17af48d[m Merge branch 'feature/firebase-auth-sara' into develop
+[33m14f2822[m[33m ([m[1;31morigin/feature/firebase-auth-sara[m[33m)[m fix(auth): habilitar Google Sign-In na web
+[33mfbb1ae1[m fix(auth): habilitar Google Sign-In na web
+[33m2b67aa0[m Ajuste nas notificações na tela de matéria pós merge
+[33m2616923[m Ajuste nas notificações na tela de matéria pós merge
+[33m5de2dd2[m Merge branch 'develop' into feature/firebase-auth-helena-v2
+[33mc497bea[m Merge branch 'develop' into feature/firebase-auth-helena-v2
+[33m94cf84c[m Merge pull request #5 from SaraMelo0/issue#Gilvan
+[33m35ddb16[m Merge pull request #5 from SaraMelo0/issue#Gilvan
+[33maaada63[m[33m ([m[1;31morigin/issue#Gilvan[m[33m)[m Merge branch 'develop' into issue#Gilvan
+[33mcf9e392[m Merge branch 'develop' into issue#Gilvan
+[33m375c184[m ?
+[33m3ac1b0c[m ?
+[33m78e5a2d[m Merge branch 'feature/firebase-auth-sara' into develop
+[33me358ba9[m Merge branch 'feature/firebase-auth-sara' into develop
+[33m2cd690f[m Merge branch 'develop' of https://github.com/SaraMelo0/StudyFlow into develop
+[33m6cb566e[m Merge branch 'develop' of https://github.com/SaraMelo0/StudyFlow into develop
+[33ma38ec5e[m Configura login com Google para web e mobile
+[33meb88126[m Configura login com Google para web e mobile
+[33m68fa699[m Pubspeck
+[33m9892dc3[m Pubspeck
+[33m820ff4a[m Pubspeck
+[33m3e4edab[m Pubspeck
+[33md4fa58c[m feat(Integra tela de matérias com Firestore)
+[33m3924ec3[m feat(Integra tela de matérias com Firestore)
+[33m2ae5874[m Integra tela de cadastro com Firebase Auth
+[33m7f55159[m Integra tela de cadastro com Firebase Auth
+[33m6810c78[m[33m ([m[1;31morigin/feature/firebase-auth-helena[m[33m)[m Integracao tela de notificacao com Firebase
+[33m1b64204[m Integracao tela de notificacao com Firebase
+[33m517af5b[m Integração tela esqueceu senha com Firebase
+[33mdfc1312[m Integração tela esqueceu senha com Firebase
+[33mbdd2eed[m Merge branch feature/firebase-auth-sara into issue#Gilvan
+[33m5db1b2c[m Merge branch feature/firebase-auth-sara into issue#Gilvan
+[33m460c81c[m .
+[33m177a250[m .
+[33m2fb9487[m fix(auth): configurar Google Sign-In para web, Android e Edge
+[33mc2dd66e[m fix(auth): configurar Google Sign-In para web, Android e Edge
+[33m56c321b[m feat(perfil,dashboard): metas no Firestore, Auth dinâmico e dashboard em tempo real
+[33ma54f3f4[m feat(perfil,dashboard): metas no Firestore, Auth dinâmico e dashboard em tempo real
+[33mc7c07b5[m feat(auth): integra Firebase Auth com e-mail, Google e domínio @souunit.com.br
+[33md0e6ca0[m feat(auth): integra Firebase Auth com e-mail, Google e domínio @souunit.com.br
+[33mb4a647c[m update contributors
+[33ma893434[m update contributors
+[33meeb11dc[m Clean up README by removing merge conflict markers
+[33m4a189e5[m Update group member responsibilities in README
+[33mb812bb8[m Resolve merge conflict in README.md
+[33m9900265[m Merge pull request #4 from SaraMelo0/develop
+[33m290e20b[m Remove pasta study_flow duplicada
+[33m7a8fc13[m Remove pasta study_flow duplicada
+[33m5e168fa[m Conecta historico da main com develop
+[33m1e8b2fc[m Conecta historico da main com develop
+[33m33b38f7[m Merge pull request #3 from SaraMelo0/issue#Arthur
+[33m3ceae8d[m Merge pull request #3 from SaraMelo0/issue#Arthur
+[33m9873a99[m Adição de documentação técnica no diretório raiz do projeto
+[33m44de03a[m Adição de documentação técnica no diretório raiz do projeto
+[33ma653505[m[33m ([m[1;31morigin/issue#Arthur[m[33m)[m atualizações dos pop-ups da página de configurações
+[33m6712f7f[m atualizações dos pop-ups da página de configurações
+[33m8d121df[m feat: adiciona página de configurações e navegação para a página de configurações
+[33me10e51c[m feat: adiciona página de configurações e navegação para a página de configurações
+[33m38dc749[m Merge pull request telas suporte
+[33m0d6a5fc[m Merge pull request telas suporte
+[33mb53bf86[m[33m ([m[1;31morigin/feat/telas-suporte[m[33m)[m Criação tela recuperação de senha
+[33m464725b[m Criação tela recuperação de senha
+[33m07310fc[m Merge branch 'develop' into issue#Arthur :wq# the commit.
+[33mdcc1fde[m Merge branch 'develop' into issue#Arthur :wq# the commit.
+[33m77746d4[m .
+[33m460b0c3[m refactor(Resolvendo todos os conflitos...)
+[33md09a8c6[m refactor(Resolvendo todos os conflitos...)
+[33m2c1914b[m Merge branch 'feat/telas-suporte' into develop
+[33m7f57b06[m Merge branch 'develop' of https://github.com/SaraMelo0/StudyFlow into develop
+[33m3283683[m Criação da tela de notificação
+[33m3f42c96[m feat(ui): implement ConfiguraçõesScreen with settings for Pomodoro timer and notifications
+[33m4feb311[m Merge pull request #1 from SaraMelo0/issue#Gilvan
+[33m727b372[m Merge pull request #1 from SaraMelo0/issue#Gilvan
+[33m93054d9[m fix(Resolução de conflitos de merge)
+[33m4fd0715[m fix(Resolução de conflitos de merge)
+[33m25b09c8[m feat(Criação da tela de  Gerenciamento de matérias)
+[33m1b13b90[m Merge branch 'feat/ui-inicial' into develop
+[33m0d735e1[m Merge branch 'feat/ui-inicial' into develop
+[33m1cea7ce[m Merge branch 'feat/ui-inicial' into develop
+[33m68fb526[m feat(perfil): metas com criar, editar e navegação a partir do dashboard
+[33m0c67999[m feat(perfil): metas com criar, editar e navegação a partir do dashboard
+[33m05dd0b5[m feat(perfil): metas com criar, editar e navegação a partir do dashboard
+[33m28b6941[m feat(perfil): metas com criar, editar e navegação a partir do dashboard
+[33m771c937[m Update README.md
+[33m92adb37[m Update README.md
+[33m9f571b7[m Update README.md
+[33m4b5c24f[m Update README.md
+[33maef653b[m Update README.md
+[33mf9bca41[m Update README.md
+[33m69602bb[m Update responsibilities for Sara Santos de Melo
+[33m049bcd1[m Update responsibilities for Sara Santos de Melo
+[33mdf3442d[m Update João Pedro Rocha's contribution description
+[33m5c6854f[m Update João Pedro Rocha's contribution description
+[33m82fe6be[m Update João Pedro Rocha's contribution description
+[33m0e9c118[m feat(Criação da tela de login)
+[33m3a408c5[m refactor(ui): PaginaPrincipal, barra de navegação e cores da aplicação
+[33m074535b[m refactor(ui): PaginaPrincipal, barra de navegação e cores da aplicação
+[33m02d477a[m refactor(ui): PaginaPrincipal, barra de navegação e cores da aplicação
+[33mf4380fe[m refactor(ui): PaginaPrincipal, barra de navegação e cores da aplicação
+[33mddbe4e6[m Atualização Readme
+[33mf2224d7[m Atualização Readme
+[33maf98f9f[m Retirada de campo desnecessário no Readme
+[33md33005b[m Retirada de campo desnecessário no Readme
+[33m422a07f[m refactor(ui): ajusta paleta de cores
+[33m00bd2be[m refactor(ui): ajusta paleta de cores
+[33m7142b15[m feat: UI inicial (welcome, login, dashboard) e estrutura por funcionalidades
+[33m750057e[m feat: UI inicial (welcome, login, dashboard) e estrutura por funcionalidades
+[33md9847d8[m feat: UI inicial (welcome, login, dashboard) e estrutura por funcionalidades
+[33m2153d43[m feat: UI inicial (welcome, login, dashboard) e estrutura por funcionalidades
+[33mbbc850a[m feat: UI inicial (welcome, login, dashboard) e estrutura por funcionalidades
+[33m7da4616[m[33m ([m[1;31morigin/master[m[33m)[m feat: UI inicial (welcome, login, dashboard) e estrutura por funcionalidades
+[33md2ef962[m Adiciona Arthur na tabela de integrantes
+[33m88cb728[m Adiciona Arthur na tabela de integrantes
+[33mec4d035[m Ajuste na tabela
+[33m8b4bd34[m Ajuste na tabela
+[33m40a3752[m Ajustando funções
+[33ma8e9d34[m Ajustando funções
+[33m535f6f6[m Merge branch 'main' of https://github.com/SaraMelo0/StudyFlow
+[33mbbe0054[m Merge branch 'main' of https://github.com/SaraMelo0/StudyFlow
+[33me63de63[m Adicionando minha função
+[33m7076337[m Adicionando minha função
+[33m0a0e945[m Update README.md
+[33m06a4aff[m Update README.md
+[33med5db91[m Fix typo in README regarding functions
+[33m174035b[m Fix typo in README regarding functions
+[33m97c077c[m Adicionando minha função
+[33mb97c2d8[m Initialize README with project details
+[33mf1d56c2[m Initialize README with project details
+[33mb8740f2[m Atualizar o README.md
+[33m453e72b[m Atualizar o README.md
+[33m4e9cfec[m docs(Adicionando o nome no Readme)
+[33m8f933b0[m Adicionando minha função
+[33m5486ac7[m Adição de Readme e funções no projeto
+[33m436cdd5[m primeiro commit
