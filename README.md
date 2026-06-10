@@ -14,7 +14,7 @@
 
 | Arthur de Sousa Bastos | Navegação entre Telas e Gerenciamento de Rotas |
 
-| João Pedro Rocha Silva Valadares | Histórico de Sessões |
+| João Pedro Rocha Silva Valadares | Histórico de Sessões |  https://youtu.be/adR3fYJyQ_8
 
 | Helena Passos Farias | Documentação, Tela de notificação, redefinição de senha e Organização do Projeto | Link do vídeo: https://youtu.be/Y6O8o62r-eM
 
