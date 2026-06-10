@@ -45,6 +45,10 @@ class _PaginaPrincipalEstado extends State<PaginaPrincipal> {
       return;
     }
 
+   if (indice == 2) {
+      context.coordenador.mostrarHistorico(context);
+      return;
+    }
     _mostrarEmBreve();
   }
 

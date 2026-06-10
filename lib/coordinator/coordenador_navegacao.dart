@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:study_flow/funcionalidades/historico/presentation/historico_sessoes_screen.dart';
 import 'package:study_flow/app/pagina_principal.dart';
 import 'package:study_flow/coordinator/rotas_navegacao.dart';
 import 'package:study_flow/funcionalidades/cadastro/presentation/pages/pagina_cadastro.dart';
@@ -36,7 +37,10 @@ final class CoordenadorNavegacao {
       _navegador(contexto).push<void>(
         _rota(RotasNavegacao.configuracoes, const PaginaConfiguracoes()),
       );
-
+  Future<void> mostrarHistorico(BuildContext contexto) =>
+      _navegador(contexto).push<void>(
+        _rota(RotasNavegacao.historico, const HistoricoSessoesScreen()),
+      );    
   Future<void> mostrarRecuperarSenha(BuildContext contexto) =>
       _navegador(contexto).push<void>(
         _rota(RotasNavegacao.recuperarSenha, const PaginaRecuperarSenha()),

@@ -4,7 +4,8 @@ enum RotasNavegacao {
   cadastro('/cadastro'),
   dashboard('/dashboard'),
   configuracoes('/configuracoes'),
-  recuperarSenha('/recuperar-senha');
+  recuperarSenha('/recuperar-senha'),
+  historico('/historico');
 
   const RotasNavegacao(this.rota);
 

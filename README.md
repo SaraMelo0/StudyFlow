@@ -9,7 +9,7 @@
 | Victor Ferreira | Sem função |
 | Julia Cabral da Silva | Desenvolvimento do Timer e Controle de Sessões |
 | Arthur de Sousa Bastos | Navegação entre Telas e Gerenciamento de Rotas |
-| João Pedro Rocha Silva Valadares | Histórico de Sessões |
+| João Pedro Rocha Silva Valadares | Histórico de Sessões | Link do Vídeo: https://youtu.be/adR3fYJyQ_8
 | Helena Passos Farias | Documentação, suporte de código e Organização do Projeto |
 
 ---
