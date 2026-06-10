@@ -7,7 +7,7 @@ class SessaoRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   CollectionReference<Map<String, dynamic>> get _colecao =>
-      _db.collection('sessoes');
+      _db.collection('sessoes_estudo');
 
   String? get _emailUsuario => FirebaseAuth.instance.currentUser?.email;
 
